@@ -1,9 +1,106 @@
 #include "minishell.h"
+//////// [env] ///////
+
+size_t get_env_size(t_env *lst)
+{
+    size_t len;
+
+    len = 0;
+    while (lst && lst->next != NULL)
+    {
+        if (lst->value != NULL)
+        {
+            len = len + ft_strlen(lst->value);
+            len++;
+        }
+        lst = lst->next;
+    }
+}
+
+char    *env_str(t_env *lst)
+{
+    char *env;
+    int i;
+    int j;
+
+    i = 0;
+    env = malloc(sizeof(char) * get_env_size(lst) + 1);
+    if (!env)
+        return (NULL);
+    while (lst && lst->next != NULL)
+    {
+        if (lst->value != NULL)
+        {
+            j = 0;
+            while (lst->value[j])
+                env[i++] = lst->value[j++];
+        }
+        if (lst->next->next != NULL)
+            env[i++] = '\n';
+        lst = lst->next;
+    }
+    env[i] = '\0';
+    return (env);
+}
+
+int count_str_env(char **env)
+{
+    int i;
+
+    i = 0;
+    while (env[i])
+        i++;
+    return (i);
+}
+
+
 /////// [parse] //////
+
+void	*delete_memmory(void *str)
+{
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
+	return (NULL);
+}
 
 int check_quote(t_mini *mini, char *str)
 {
-    
+    if (quote(*str, 2147483647))
+    {
+        ft_putendl_fd("minishell: syntax error with open quotes", STDERR);
+        delete_memmory(*str);
+        mini->start = NULL;
+        mini->ret = 2;
+        return (1);
+    }
+    return (0);
+}
+
+int quote(char *line, int i)
+{
+    int j;
+    int start;
+
+    j = 0;
+    start = 0;
+    while (line[j] && j != i)
+    {
+        if (j > 0 && line[j - 1] == '\\')
+            ;
+        else if (start == 0 && line[j] == '\"')
+            start = 1;
+        else if (start == 0 && line[j] == '\'')
+            start == 2;
+        else if (start == 1 && line[j] == '\"')
+            start = 0;
+        else if (start == 2 && line[j] == '\'')
+            start = 0;
+        j++;
+    }
+    return (start);
 }
 
 void parse(t_mini *mini)
@@ -26,7 +123,7 @@ void parse(t_mini *mini)
         mini->ret = g_sig.exit_status;
     if (check_quote(mini, &str))
         return ;
-    
+    ///
 }
 
 /////// [init structs] //////
