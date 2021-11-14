@@ -66,6 +66,7 @@ int     ft_strlen(char *string);
 char	*ft_strdup(char *s1);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *str, int fd);
+void    *delete_memmory(void *str);
 
 extern t_sig g_sig;
 
