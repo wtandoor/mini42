@@ -15,6 +15,7 @@ size_t get_env_size(t_env *lst)
         }
         lst = lst->next;
     }
+    return (len);
 }
 
 char    *env_str(t_env *lst)
@@ -53,6 +54,41 @@ int count_str_env(char **env)
     return (i);
 }
 
+int env_validation(char *env)
+{
+    int i;
+
+    i = 0;
+    if (ft_isdigit(env[i]) == 1)
+        return (0);
+    while (env])
+    {
+        /* code */
+    }
+    
+}
+
+int env_char(int c)
+{
+    if (ft_isalnum(c) == 1 || c == '_')
+        return (1);
+    return (0);
+}
+
+int len_env_value(char *env)
+{
+    int i;
+    int size;
+
+    size = 0;
+    i = 0;
+    while (env[i] && env[i] != '=')
+        i++;
+    i++;
+    while (env[i++])
+        size++;
+    return(size);
+}
 
 /////// [parse] //////
 
