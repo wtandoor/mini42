@@ -44,6 +44,33 @@ char    *env_str(t_env *lst)
     return (env);
 }
 
+int init_sec_env(t_mini *mini, char **env_ar)
+{
+    t_env *env;
+    t_env *new;
+    int i;
+
+    env = malloc(sizeof(t_env));
+    if (!env)
+        return (1);
+    env->value = ft_strdup(env_ar[0]);
+    env->next = NULL;
+    mini->sec_env = env;
+    i = 1;
+    while (env_ar && env_ar[0] && env_ar[i])
+    {
+        new = malloc(sizeof(t_env));
+        if (!new)
+            return (1);
+        new->value = ft_strdup(env_ar[i]);
+        new->next = NULL;
+        env->next = new;
+        env = new;
+        i++;
+    }
+    return (0);
+}
+
 int count_str_env(char **env)
 {
     int i;
@@ -61,11 +88,15 @@ int env_validation(char *env)
     i = 0;
     if (ft_isdigit(env[i]) == 1)
         return (0);
-    while (env])
+    while (env[i] && env[i] != '=')
     {
-        /* code */
+        if (ft_isalnum(env[i] == 0))
+            return (-1);
+        i++;
     }
-    
+    if (env[i] != '=')
+        return (2);
+    return (1);
 }
 
 int env_char(int c)
