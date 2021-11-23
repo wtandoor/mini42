@@ -22,19 +22,25 @@ int find_env(char *old_path, t_env *env)
 	char new_one[PATH];
 
 	name_of_env(old_one, old_path);//finds the name of path
+	int i = 0;
 	while (env && env->next)
 	{
 		name_of_env(new_one, env->value);//bring the path of enviroments and put them to new_one var
 		if (ft_strcmp(old_one, new_one) == 0)
 		{
 			// free_memo(env->value);///------------------FAIL!!!!!!!!!!!!!!!!!!!!!!!!
-			printf("2) old_one :%s\n", env->value);
+			printf("env->value before  :%s\n", env->value);
 			env->value = ft_strdup(old_path);
+			printf("env->value after :%s\n", env->value);
+			
 			return (1);
 		}
+		// printf("%d IN FUNC: %s\n\n", i, env->value);
+		i++;
 		env = env->next;
 	}
-	return 0;
+	
+	return (0);
 }
 
 
@@ -76,7 +82,7 @@ int	ft_strlen(const char *s)
 	if (!s)
 		return (0);
 	while (s[i] != '\0')
-		s++;
+		i++;
 	return (i);
 }
 
@@ -101,8 +107,58 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в предидущей он не нашелся				
+													//ЭТА ХУЕВАЯ ХЕРНЯ ВЫВОДИТ НЕВЕРНЫЙ ПУТЬ!!! ПЕРЕДЕЛАЙ
+{
+	t_env *temp;
+	t_env *usable;
+
+	printf("patht: %s\n", path);	///ВОТ ТУТ ВЫВОДИТ      /Users/cc
+	if (env && env->value == NULL)
+	{
+		env->value = ft_strdup(path);
+		return (0);
+	}
+	usable = malloc(sizeof(t_env));
+	if (!usable)
+		return (-1);
+	usable->value = ft_strdup(path);
+	while (env && env->next && env->next->next)
+		env = env->next;
+	temp = env->next;
+	env->next = usable;
+	usable->next = temp;
+	
+	printf("старый env->next: %s\n", temp->value);
+	printf("новый env->next: %s\n", env->value);
+	// printf("новый env->next->next: %s\n", usable->next);
+	return (0);
+	// env->
+}
+
+int			env_add(const char *value, t_env *env) //в случае
+{
+	t_env	*new;								//ЭТА ХУЕВАЯ ХЕРНЯ ВЫВОДИТ НЕВЕРНЫЙ ПУТЬ!!! ПЕРЕДЕЛАЙ
+	t_env	*tmp;
 
 
+	printf("patht: %s\n", value); ///ВОТ ТУТ ВЫВОДИТ      /Users/cc
+
+	if (env && env->value == NULL)
+	{
+		env->value = ft_strdup(value);
+		return (SUCCESS);
+	}
+	if (!(new = malloc(sizeof(t_env))))
+		return (-1);
+	new->value = ft_strdup(value);
+	while (env && env->next && env->next->next)
+		env = env->next;
+	tmp = env->next;
+	env->next = new;
+	new->next = tmp;
+	return (SUCCESS);
+}
 
 
 
@@ -117,16 +173,19 @@ int update_old_path(t_env *env)
 	char *cwd;
 	char *old_path;
 
-	cwd = (char *)malloc(sizeof (char *) * 5000);
+	cwd = (char *)malloc(sizeof (char *) * 50000);
 	getcwd(cwd, PATH);
 	if (cwd == NULL)
 		return (ERROR);
 	old_path = ft_strjoin("OLDPWD=", cwd); //записал место, где мы находимся сейчас
-	printf(" old_path____: %s\n", old_path);
+	// printf(" old_path____: %s\n", old_path);
 	if (!old_path)
 		return (ERROR);
-	if (find_env(old_path, env) == 0); //если программа завершилась успешно, перед этим мы в oldpath добавили дирректорию, которая будет устаревшей при следующем  переходе
-		add_env(old_path, env);
+	if (find_env(old_path, env) == 1) //если программа завершилась успешно, перед этим мы в oldpath добавили дирректорию, которая будет устаревшей при следующем  переходе
+		printf("patht: %s\n", old_path);
+		// env_add(old_path, env); //функция добавляет oldpwd сам если не нашел ее в исходнике////НО ОНА ВСТАВЛЯЕТ НЕВЕРНЫЙ ПУТЬ
+	// printf("напечатай мне что выведетfind_env: %i\n", find_env(old_path, env));
+	// printf("%s\n\n", old_path);
 	return (41);
 }
 
