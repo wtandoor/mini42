@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int init_sec_env(t_mini *mini, char **env_ar)
 {

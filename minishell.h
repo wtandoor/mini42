@@ -68,6 +68,25 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *str, int fd);
 void    *delete_memmory(void *str);
 
+
+
+/////env//////
+
+int str_env_length(char **env);
+size_t get_env_size(t_env *lst);
+char    *env_str(t_env *lst);
+void print_new_env(t_env *env);
+void    sort(char **arr, int env_length);
+int init_sec_env(t_mini *mini, char **env_ar);
+int count_str_env(char **env);
+int env_validation(char *env);
+char *get_env_val(char *param, t_env *env);
+char *get_name(char *dest, char *src);
+int len_env_value(char *env);
+int env_char(int c);
+char *env_val1(char *env);
+void free_arr2(char **arr);
+
 extern t_sig g_sig;
 
 #endif
