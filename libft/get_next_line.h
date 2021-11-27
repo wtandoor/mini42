@@ -8,13 +8,14 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <string.h>
+# include "libft.h"
 
 #define BUFFER_SIZE  1
 
 int		strl(char *str, char c);
-char	*ft_strchr(char *str, int ch);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_substr(char *s, int start, int len, int flag_free);
+char	*ft_strchr_gnl(char *str, int ch);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_substr_gnl(char *s, int start, int len, int flag_free);
 int		get_next_line(int fd, char **line);
 int		ft_check_rs(char *buf, int rs);
 #endif

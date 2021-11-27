@@ -25,7 +25,7 @@ int	get_next_line(int fd, char **line)
 		return (ft_check_rs(buf, -1));
 	while (rs)
 	{
-		if (ft_strchr(l, '\n') != NULL)
+		if (ft_strchr_gnl(l, '\n') != NULL)
 			break ;
 		rs = read_rs(fd, buf, l, rs);
 		if (rs == -1)
@@ -34,8 +34,8 @@ int	get_next_line(int fd, char **line)
 		if (!l)
 			return (ft_check_rs(buf, -1));
 	}
-	*line = ft_substr(l, 0, strl(l, '\n'), 0);
-	l = ft_substr(l, strl(l, '\n') + 1, (strl(l, '\0') - strl(l, '\n')), 1);
+	*line = ft_substr_gnl(l, 0, strl(l, '\n'), 0);
+	l = ft_substr_gnl(l, strl(l, '\n') + 1, (strl(l, '\0') - strl(l, '\n')), 1);
 	if (!l && rs)
 		return (ft_check_rs(buf, -1));
 	return (ft_check_rs(buf, rs));
