@@ -163,7 +163,7 @@ int update_old_path(t_env *env)
 	// printf("напечатай мне что выведетfind_env: %i\n", find_env(old_path, env));
 	// printf("%s\n\n", old_path);
 	free_memo(old_path);
-	return (41);
+	return (SUCCESS);
 }
 
 
@@ -206,21 +206,85 @@ void	ft_lstadd_back_m(t_env **lst, t_env *new)
 
 static char		*path_of_env(t_env *env, const char *var, size_t len) //функция ищет путь, который мы задаем. потом она его пихает в какую-то переменную
 {
-	char *pizdec;
+	char *path;
 	int	i;
-	int lenght;
+	int length;
+	int	h;
 
+	i = 0;
+	h = 0;
 	while (env && env->next)
 	{
-		if (ft_strncmp(var, env->value, len));
+		if (!ft_strncmp(env->value, var, len))
 		{
-			pizdec = malloc(sizeof (char *) (lenght - len));
+			length = ft_strlen(env->value) - len;
+			path = (char *)malloc(sizeof(char *) * length + 1);
+			if (!path)
+				return (NULL);
+			while (env->value[i])
+			{
+				if(i > (int)len)
+				{
+					path[h] = env->value[i];
+					h++;
+					// printf("%s\n", path);
+				}
+				i++;
+			}
+			path[h] = '\0';
+			printf("%s\n", path);
+			return (path);
 		}
 		env = env->next;
 	}
 	return (NULL);
 }
 
+int go_find_p_env(int variation, t_env *env)
+{
+	char *path;
+
+	path = NULL;
+	if (variation == 0)
+	{
+		path = path_of_env(env, "HOME", 4);// хероботина определяет путь home
+		if (!path)
+			ft_putendl_fd("HOME is missing", 2);
+		if (!path)
+			return (ERROR);
+	}
+	if (variation == 1) 
+		path = path_of_env(env, "OLDPWD", 6);
+		if (!path)
+		{
+			ft_putendl_fd("OLDPWD is missing", 2);
+		}
+		if (!path)
+			return (ERROR);
+		free_memo(path);
+	return (1);
+
+}
+
+int ft_cd(char **strs, t_env *env)
+{
+	int cd_val;
+
+	if (!strs)
+		return (go_find_p_env(0, env));
+	if (ft_strcmp(strs[1], "-") == 0)
+		cd_val = go_find_p_env(1, env);
+	else
+	{
+		update_old_path(env);
+		cd_val = chdir(strs[1]);
+		if (cd_val < 0)
+			cd_val = cd_val * (-1);
+		if (cd_val != 0)
+			error(strs);
+	}
+	return (1);
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -246,6 +310,8 @@ int main(int argc, char **argv, char **env)
 	// 	printf("%s\n", env1->value);
 	// 	env1 = env1->next;
 	// }
-	path_of_env(env1, "HOME", 4); // хероботина определяет путь home
+
+	// ft_cd(0, env1); 
+	export(env1);
     return (0);
 }
