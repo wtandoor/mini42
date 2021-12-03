@@ -5,14 +5,17 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#include "string.h"
+#include <errno.h>
+#include <string.h>
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
-
+#define PATH 5000
 #define SUCCESS 0
 #define ERROR 1
 
@@ -60,15 +63,40 @@ typedef struct s_mini
 
 void    parser(char *str);
 char    *ft_quote(char *str, int *i);
-char	*ft_substr(char *s, unsigned int start, int len);
-char	*ft_strjoin(char *s1, char *s2);
-int     ft_strlen(char *string);
-char	*ft_strdup(char *s1);
+// char	*ft_substr(char *s, unsigned int start, int len);
+// char	*ft_strjoin(char *s1, char *s2);
+// int     ft_strlen(char *string);
+// char	*ft_strdup(char *s1);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *str, int fd);
 void    *delete_memmory(void *str);
 
+/////BUILTINS/////
+int     update_old_path(t_env *env);
+int     find_env(char *old_path, t_env *env);
+char    *name_of_env(char *to, char *from);
+void	*free_memo(void *s);
 
+////should be deleted later////
+void	ft_lstadd_back_m(t_env **lst, t_env *new1);
+t_env	*ft_lstlast_m(t_env *lst);
+t_env	*ft_lstnew_m(char *content);
+
+char	*ft_strjoin(char const *s1, char const *s2);
+
+//builtins
+void    error(char **strs);
+
+///builtins/cd_update_path.c///
+int	add_env(char *path, t_env *env);
+///uiltins/export///
+int len_struct(t_env *env);
+char *str_of_env(t_env *sec_env);
+void sort_env(t_env *sec_env);
+int ft_export(char **strs, t_env *env, t_env *sec_env);
+
+void init_env(t_mini *mini, char **env);
+void    ft_error(char **strs);
 
 /////env//////
 

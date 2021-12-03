@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
 void    error(char **strs)
 {
 	ft_putstr_fd("cd: ", 2);
