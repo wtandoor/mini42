@@ -11,6 +11,10 @@
 #include "libft/get_next_line.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <sys/wait.h>
+# include <limits.h>
 
 #define STDIN 0
 #define STDOUT 1
