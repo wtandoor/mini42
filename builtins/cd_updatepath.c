@@ -1,4 +1,33 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
+
+///ДЛЯ ПРОВЕРКИ EXPORTа
+// int init_sec_env(t_mini *mini, char **env_ar)
+// {
+//     t_env *env;
+//     t_env *new1;
+//     int i;
+
+//     env = (t_env *)malloc(sizeof(t_env));
+//     if (!env)
+//         return (1);
+//     env->value = ft_strdup(env_ar[0]);
+//     env->next = NULL;
+//     mini->sec_env = env;
+//     i = 1;
+//     while (env_ar && env_ar[0] && env_ar[i])
+//     {
+//         new1 = (t_env *)malloc(sizeof(t_env));
+//         if (!new1)
+//             return (1);
+//         new1->value = ft_strdup(env_ar[i]);
+//         new1->next = NULL;
+//         env->next = new1;
+//         env = new1;
+//         i++;
+//     }
+//     return (0);
+// }
+
 
 ////finds the path////
 char *name_of_env(char *to, char *from)
@@ -22,7 +51,6 @@ int find_env(char *old_path, t_env *env)
 	char new_one[PATH];
 
 	name_of_env(old_one, old_path);//finds the name of path
-	int i = 0;
 	while (env && env->next)
 	{
 		name_of_env(new_one, env->value);//bring the path of enviroments and put them to new_one var
@@ -36,76 +64,11 @@ int find_env(char *old_path, t_env *env)
 			return (1);
 		}
 		// printf("%d IN FUNC: %s\n\n", i, env->value);
-		i++;
 		env = env->next;
 	}
 	
 	return (0);
 }
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-// char	*ft_strdup(const char *s1)
-// {
-// 	size_t	len;
-// 	char	*str;
-// 	char	*tmp;
-
-// 	len = ft_strlen(s1);
-// 	str = (char *)malloc(sizeof(char) * len + 1);
-// 	if (str == NULL)
-// 		return (NULL);
-// 	tmp = str;
-// 	while (len--)
-// 		*str++ = *s1++;
-// 	*str = '\0';
-// 	return (tmp);
-// }
-
-
-// int	ft_strlen(const char *s)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	if (!s)
-// 		return (0);
-// 	while (s[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
-
-// char	*ft_strjoin(char const *s1, char const *s2)
-// {
-// 	char			*dest;
-// 	unsigned int	i;
-
-// 	i = 0;
-// 	if (s1 == NULL || s2 == NULL)
-// 		return (NULL);
-// 	dest = (char*)malloc(sizeof(*dest) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-// 	if (dest == NULL)
-// 		return (NULL);
-// 	while (*s1 != '\0')
-// 		dest[i++] = *s1++;
-// 	while (*s2 != '\0')
-// 		dest[i++] = *s2++;
-// 	dest[i] = '\0';
-// 	return (dest);
-// }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в предидущей он не нашелся
 {
@@ -118,7 +81,7 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 		env->value = ft_strdup(path);
 		return (0);
 	}
-	usable = malloc(sizeof(t_env));
+	usable = (t_env *)malloc(sizeof(t_env));
 	if (!usable)
 		return (-1);
 	usable->value = ft_strdup(path); 
@@ -135,14 +98,6 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 	usable->next = temp;
 	return (0);
 }
-
-
-
-
-
-
-
-
 
 
 int update_old_path(t_env *env)
@@ -166,12 +121,12 @@ int update_old_path(t_env *env)
 	return (SUCCESS);
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 t_env	*ft_lstnew_m(char *content)
 {
 	t_env	*lst;
 
-	lst = malloc(sizeof(t_env));
+	lst = (t_env *)malloc(sizeof(t_env));
 	if (!lst)
 		return (NULL);
 	lst->value = content;
@@ -188,7 +143,7 @@ t_env	*ft_lstlast_m(t_env *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back_m(t_env **lst, t_env *new)
+void	ft_lstadd_back_m(t_env **lst, t_env *new1)
 {
 	t_env	*temp;
 
@@ -197,13 +152,13 @@ void	ft_lstadd_back_m(t_env **lst, t_env *new)
 		if (*lst)
 		{
 			temp = ft_lstlast_m(*lst);
-			temp->next = new;
+			temp->next = new1;
 		}
 		else
-			*lst = new;
+			*lst = new1;
 	}
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 static char		*path_of_env(t_env *env, const char *var, size_t len) //функция ищет путь, который мы задаем. потом она его пихает в какую-то переменную
 {
 	char *path;
@@ -311,7 +266,6 @@ int main(int argc, char **argv, char **env)
 	// 	env1 = env1->next;
 	// }
 
-	// ft_cd(0, env1); 
-	export(env1);
+	// ft_cd(0, env1);
     return (0);
 }

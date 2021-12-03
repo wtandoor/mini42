@@ -6,8 +6,8 @@ int check_cmds(char **buff)
 
 	i = 0;
 	if (ft_strcmp(buff[i], "echo") == 0)
-		echo(buff);
+		ft_echo(buff);
 	if (ft_strcmp(buff[i], "pwd") == 0)
-		pwd();
+		ft_pwd(buff);
 	
 }
