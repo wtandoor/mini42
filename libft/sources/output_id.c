@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	output_decimal(t_flags flags, va_list parameters)
 {

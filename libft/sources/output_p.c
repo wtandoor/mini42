@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 char	*string_edit_p(unsigned long nb, t_flags flags)
 {
