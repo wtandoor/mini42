@@ -1,3 +1,5 @@
+
+   
 #include "../minishell.h"
 // #include <stdio.h>
 // #include <stdlib.h>
@@ -63,8 +65,9 @@ int main(int argc, char **argv, char **env)
     int i = 0;
     t_env *env1;
     t_env   *tmp;
-    char *s;
     
+	(void)argc;
+	(void)argv;
     tmp = NULL;
     env1 = tmp;
     while (env[i])
