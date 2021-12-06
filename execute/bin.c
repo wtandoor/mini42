@@ -1,5 +1,5 @@
 #include "../minishell.h"
-//discovering are_pipe (((box
+//discovering are_pipe free_token
 
 int			box(char *path, char **arg, t_env *env, t_mini *mini)
 {
@@ -9,7 +9,24 @@ int			box(char *path, char **arg, t_env *env, t_mini *mini)
 
     res = 0;
     g_sig.pid = fork();
-
+    if (g_sig.pid == 0)
+    {
+        p = env_str(env);
+        env_arr = ft_split(p, '\n');
+        delete_memmory(p);
+        if (ft_strchr(path, '/') != NULL)
+            execve(path, arg, env_arr);
+        res = error_path(path);
+        free_arr2(env_arr);
+        free_token(mini->start);
+        exit(res);
+    }
+    else
+        waitpid(g_sig.pid, &res, 0);
+    if (g_sig.sigint == 1 || g_sig.sigquit == 1)
+        return (g_sig.exit_status);
+    res = (res == 32256 || res == 32512) ? res / 256 : !!res;
+    return (res);
 }
 
 void ft_close(int fd)
@@ -39,7 +56,7 @@ char *check_dir(char *str, char *cmd)
     return (path);
 }
 
-int error(char *path)
+int error_path(char *path)
 {
     DIR *folder;
     int fd;

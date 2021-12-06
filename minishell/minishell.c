@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 /////// [parse] //////
 
@@ -116,6 +116,23 @@ void init_sig(void)
 
 ///////// [main] /////////
 
+
+void ex_redir_proc(t_mini *mini, t_token *token)
+{
+
+}
+
+void mshell(t_mini *mini)
+{
+    t_token *token;
+    int i;
+
+    token = next_ex(mini->start, 0);
+    token = (is_type())
+
+}
+
+
 int main(int argc, char **argv, char **env)
 {
     t_mini mini;
@@ -125,20 +142,18 @@ int main(int argc, char **argv, char **env)
     init_mini(&mini);
     init_fds(&mini);
     init_env(&mini, env);
-    //update_shell_level(mini.env); func for shlvl
+    init_sec_env(&mini, env);
+    update_shell_level(mini.env);
     while (mini.exit == 0)
     {
         init_sig();
         parser(&mini);
         if (mini.start != NULL && line_check(&mini, mini.start))
-            minishell(&mini);
+            mshell(&mini);
         free_token(mini.start);
     }
     free_env(mini.env);
     free_env(mini.sec_env);
     return(mini.ret);
-    
-
-
-
 }
+
