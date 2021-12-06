@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	zero(char symb, t_flags *flags)
 {

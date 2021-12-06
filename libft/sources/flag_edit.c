@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 void	flag_edit(t_flags *flags, va_list parameters)
 {

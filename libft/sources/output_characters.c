@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	output_characters(char *s1, t_flags flags)
 {

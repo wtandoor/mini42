@@ -27,6 +27,7 @@ FUNCTIONS = 	ft_isascii.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_memccpy.c \
+				ft_strcmp.c\
 				ft_strdup.c \
 				ft_calloc.c \
 				ft_memmove.c \
