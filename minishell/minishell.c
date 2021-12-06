@@ -106,12 +106,41 @@ void init_env(t_mini *mini, char **env)
     return (0);
 }
 
+void delete_token(t_token *start)
+{
+    while(start && start->next)
+    {
+        delete_memmory(start->str);
+        start = start->next;
+        delete_memmory(start->prev);
+    }
+    if (start)
+    {
+        delete_memmory(start->str);
+        delete_memmory(start);
+    }
+}
+
 void init_sig(void)
 {
 	g_sig.sigint = 0;
 	g_sig.sigquit = 0;
 	g_sig.pid = 0;
 	g_sig.exit_status = 0;
+}
+
+void reload_std(t_mini *mini)
+{
+    dup2(mini->in, 0);
+    dup2(mini->out, 1);
+}
+
+void	close_fd(t_mini *mini)
+{
+	ft_close(mini->fdin);
+	ft_close(mini->fdout);
+	ft_close(mini->pipin);
+	ft_close(mini->pipout);
 }
 
 ///////// [main] /////////
@@ -128,8 +157,27 @@ void mshell(t_mini *mini)
     int i;
 
     token = next_ex(mini->start, 0);
-    token = (is_type())
-
+    token = (is_type(mini->start, "TAI")) ? mini->start->next : token;
+    while (mini->exit == 0 && token)
+    {
+        mini->charge = 1;
+        mini->dad = 1;
+        mini->last = 1;
+        ex_redir_proc(mini, token);
+        reload_std(mini);
+        close_fd(mini);
+        init_fds(mini);
+        waitpid(-1, &i, 0);
+        i = WEXITSTATUS(i);
+        mini->ret = (mini->last == 0) ? i : mini->ret;
+        if (mini->dad == 0)
+        {
+            delete_token(mini->start);
+            exit(mini->ret);
+        }
+        mini->no_exec = 0;
+        token = next_ex(token, 1);
+    }
 }
 
 
