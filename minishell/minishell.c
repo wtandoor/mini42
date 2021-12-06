@@ -148,7 +148,46 @@ void	close_fd(t_mini *mini)
 
 void ex_redir_proc(t_mini *mini, t_token *token)
 {
+    t_token *next1;
+    t_token *prev1;
+    int i;
 
+    prev1 = prev(token, 0);
+    next1 = next(token, 0);
+    i = 0;
+    if (type_search(prev1, 3))
+        redirect(mini, token, 3);
+    else if (type_search(prev1, 4))
+        redirect(mini, token, 4);
+    else if ()
+}
+
+int type_search(t_token *token, int i)
+{
+    if (token && token->type == i)
+        return (1);
+    else
+        return (0);
+}
+
+int is_type(t_token *token, char *type)
+{
+    if (ft_strchr(type, 'I') && type_search(token, 5))
+        return (1);
+    else if (ft_strchr(type, ' ') && type_search(token, 0))
+        return (1);
+    else if (ft_strchr(type, 'X') && type_search(token, 1))
+        return (1);
+    else if (ft_strchr(type, 'x') && type_search(token, 2))
+        return (1);
+    else if (ft_strchr(type, 'A') && type_search(token, 4))
+        return (1);
+    else if (ft_strchr(type, 'T') && type_search(token, 3))
+        return (1);
+    else if (ft_strchr(type, 'P') && type_search(token, 6))
+        return (1);
+    else if (ft_strchr(type, 'E') && type_search(token, 7))
+        return (1);
 }
 
 void mshell(t_mini *mini)
