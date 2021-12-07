@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 int num_args(char **args)
 {
