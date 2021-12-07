@@ -81,7 +81,7 @@ void init_fds(t_mini *mini)
     mini->pid = -1;
 }
 
-void init_env(t_mini *mini, char **env)
+int init_env(t_mini *mini, char **env)
 {
     t_env   *env1;
     t_env   *new;
