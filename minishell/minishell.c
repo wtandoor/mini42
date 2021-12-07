@@ -81,7 +81,7 @@ void init_fds(t_mini *mini)
     mini->pid = -1;
 }
 
-int init_env(t_mini *mini, char **env)
+void    init_env(t_mini *mini, char **env)
 {
     t_env   *env1;
     t_env   *new;
@@ -103,7 +103,6 @@ int init_env(t_mini *mini, char **env)
         new->next = NULL;
         env1->next = new;
     }
-    return (0);
 }
 
 void delete_token(t_token *start)
