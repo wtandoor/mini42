@@ -87,7 +87,7 @@ int init_env(t_mini *mini, char **env)
     t_env   *new;
     int     i;
 
-    env1 = malloc(sizeof(t_env));
+    env1 = (t_env *)malloc(sizeof(t_env));
     if (!env1)
         return (1);
     env1->value = ft_strdup(env[0]);
