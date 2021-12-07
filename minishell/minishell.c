@@ -159,7 +159,14 @@ void ex_redir_proc(t_mini *mini, t_token *token)
         redirect(mini, token, 3);
     else if (type_search(prev1, 4))
         redirect(mini, token, 4);
-    else if ()
+    else if (type_search(prev1, 5))
+        input(mini,token);
+    else if (type_search(prev1, 6))
+        i = pipe_ex(mini);
+    if (next1 && type_search(next1, 7) == 0 && i != 1)
+        ex_redir_proc(mini, next1->next);
+    if ((type_search(prev1, 7) || type_search(prev1, 6) || !prev1) && i != 1 && mini->no_exec == 0)
+        execute_command(mini, token);
 }
 
 int type_search(t_token *token, int i)
