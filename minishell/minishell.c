@@ -144,6 +144,68 @@ void	close_fd(t_mini *mini)
 
 ///////// [main] /////////
 
+int pipe_ex(t_mini *mini)
+{
+    pid_t pid;
+    int pfd[2];
+
+    pipe(pfd);
+    pid = fork();
+    if (pid == 0)
+    {
+        ft_close(pfd[1]);
+        dup2(pfd[0], 1);
+        mini->pipin = pfd[0];
+        mini->pid = -1;
+        mini->dad = 0;
+        mini->no_exec = 0;
+        return (2);
+    }
+    else
+    {
+        ft_close(pfd[0]);
+        dup2(pfd[1], 1);
+        mini->pipout = pfd[1];
+        mini->pid = pid;
+        mini->last = 0;
+        return (1);
+        }
+}
+
+void input(t_mini *mini, t_token *token)
+{
+    ft_close(mini->fdin);
+    mini->fdin = open(token->str, S_IRWXU , O_RDONLY);
+    if (mini->fdin == -1)
+    {
+        ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(token->str, 2);
+		ft_putendl_fd(": No such file or directory", 2);
+		mini->ret = 1;
+		mini->no_exec = 1;
+		return ;
+    }
+    dup2(mini->fdout, 1);
+}
+
+void redirect(t_mini *mini, t_token *token, int i)
+{
+    ft_close(mini->fdout);
+    if (i == 3)
+        mini->fdout = open(token->str, O_TRUNC | O_WRONLY | O_CREAT, S_IRWXU);
+    else
+        mini->fdout = open(token->str, O_APPEND | O_WRONLY | O_CREAT, S_IRWXU);
+    if (mini->fdout == -1)
+    {
+        ft_putstr_fd("minishell: ", 2);
+        ft_putstr_fd(token->str, 2);
+        ft_putendl_fd(": No such file or directory", 2);
+        mini->ret = 1;
+        mini->no_exec = 1;
+        return ;
+    }
+    dup2(mini->fdout, 1);
+}
 
 void ex_redir_proc(t_mini *mini, t_token *token)
 {
