@@ -257,6 +257,62 @@ void parse(t_mini *mini)
     }
 }
 
+int copy_var(char *new, char *env_val, int pos)
+{
+    int i;
+
+    i = 0;
+    while (env_val[i])
+        new[pos++] = env_val[i++];
+    return (i);
+}
+
+void var_in(t_disc *str, char *param, t_env *env, int err)
+{
+    char *env_val;
+
+    env_val = var_value(param, str->j, env, err);///get_var_value
+    if (env_val)
+        str->i += copy_var(str->new, env_val, str->i);//varlcpy //complete
+    else
+        str->i += 0;
+    delete_memmory(env_val);
+    if (ft_isdigit(param[str->j]) == 0 && param[str->j - 1] != '?')
+        while(is_char(param[str->j]) == 1)//is_env_char
+            str->j++;
+    else
+        if (param[str->j - 1] != '?')
+            str->j++;
+}
+
+int param_malloc(char *param, t_env *env, int err)
+{
+    int i;
+    int size;
+
+    i = -1;
+    size = 0;
+    while (param[++i])
+    {
+        if (param[i] == -36)
+        {
+            i++;
+            if ((param[i] == '\0' || ft_isalnum(param[i]) == 0) && param[i] != '?')
+                size++;
+            else
+                size += get_length(param, i, env, err); //get_var_len
+            if (ft_isdigit(param[i]) == 0)
+            {
+                while (param[i + 1] && is_char(param[i]))
+                    i++;
+            }
+            else
+                size--;
+        }
+        size++;
+    }
+    return (size);
+}
 
 char *discovering(char *param, t_env *env, int err)
 {
@@ -264,6 +320,23 @@ char *discovering(char *param, t_env *env, int err)
     int new_len;
 
     new_len = param_malloc(param, env, err); ///arg_alloc_len
-    if 
-    return (NULL);
+    str.new = (char *)malloc(sizeof(char) * new_len + 1);
+    if (!str.new)
+        return (NULL);
+    str.i = 0;
+    str.j = 0;
+    while (str.i < new_len && param[str.j])
+    {
+        while(param[str.j] == -36)
+        {
+            str.j++;
+            if ((param[str.j] == '\0' || ft_isalnum(param[str.j]) == 0) && param[str.j] != '?')
+                str.new[str.i++] = '$';
+            else
+                var_in(&str, param, env, err);
+        }
+        str.new[str.i++] = param[str.j++];
+    }
+    str.new[str.i] = '\0';
+    return (str.new);
 }
