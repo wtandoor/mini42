@@ -260,5 +260,10 @@ void parse(t_mini *mini)
 
 char *discovering(char *param, t_env *env, int err)
 {
-    
+    t_disc str;
+    int new_len;
+
+    new_len = param_malloc(param, env, err); ///arg_alloc_len
+    if 
+    return (NULL);
 }

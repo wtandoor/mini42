@@ -45,6 +45,13 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
+typedef struct s_disc
+{
+    char *new;
+    int i;
+    int j;
+}               t_disc;
+
 typedef struct s_mini
 {
     t_token *start;
@@ -98,7 +105,6 @@ int len_struct(t_env *env);
 char *str_of_env(t_env *sec_env);
 void sort_env(t_env *sec_env);
 int ft_export(char **strs, t_env *env, t_env *sec_env);
-
 void init_env(t_mini *mini, char **env);
 void    ft_error(char **strs);
 
