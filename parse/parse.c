@@ -285,6 +285,41 @@ void var_in(t_disc *str, char *param, t_env *env, int err)
             str->j++;
 }
 
+int res_size(int ret)
+{
+    char *temp;
+    int len;
+
+    temp = ft_itoa(ret);
+    len = ft_strlen(temp);
+    delete_memmory(temp);
+    return(len);
+}
+
+int get_length(char *param, int i, t_env *env, int ret)
+{
+    char name_var[4096];
+    char *var_value;
+    int l;
+
+    l = 0;
+    if (param[i] == '?')
+        return (res_size(ret)); //ret_size //comp
+    if (ft_isdigit(param[i]))
+        return (0);
+    while (param[i] && is_char(param[i]) == 1 && i < 4096)
+    {
+        name_var[l] = param[i];
+        i++;
+        l++;
+    }
+    name_var[l] = '\0';
+    var_value = get_env_val(name_var, env); //get_env_val //comp
+    l = ft_strlen(var_value);
+    delete_memmory(var_value);
+    return (l);
+}
+
 int param_malloc(char *param, t_env *env, int err)
 {
     int i;
@@ -300,7 +335,7 @@ int param_malloc(char *param, t_env *env, int err)
             if ((param[i] == '\0' || ft_isalnum(param[i]) == 0) && param[i] != '?')
                 size++;
             else
-                size += get_length(param, i, env, err); //get_var_len
+                size += get_length(param, i, env, err); //get_var_len //comp
             if (ft_isdigit(param[i]) == 0)
             {
                 while (param[i + 1] && is_char(param[i]))
@@ -312,6 +347,13 @@ int param_malloc(char *param, t_env *env, int err)
         size++;
     }
     return (size);
+}
+
+int		is_char(int c)
+{
+	if (ft_isalnum(c) == 1 || c == '_')
+		return (1);
+	return (0);
 }
 
 char *discovering(char *param, t_env *env, int err)
