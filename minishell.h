@@ -125,6 +125,37 @@ int env_char(int c);
 char *env_val1(char *env);
 void free_arr2(char **arr);
 
+////exec////
+int			box(char *path, char **arg, t_env *env, t_mini *mini);
+void ft_close(int fd);
+char *check_dir(char *str, char *cmd);
+int error_path(char *path);
+char *join_path(char *str1, char *str2);
+int execute_bin(char **arg, t_env *env, t_mini *mini);
+char **create_tab(t_token *token);
+void execute_command(t_mini *mini, t_token *token);
+
+////parse////
+int check_quote(t_mini *mini, char *str);
+int quote(char *line, int i);
+void init_args(t_token *token, int sep);
+int next_a(char *str, int *i);
+t_token *add_token(char *s, int *i);
+void skip_chars(char *str, int *i);
+t_token *tokens(char *str);
+int skip_separator(char *str, int i);
+int is_separator(char *str, int i);
+int valid_param(t_token *token);
+void parse(t_mini *mini);
+void take_args(t_mini *mini);
+int copy_var(char *new, char *env_val, int pos);
+void var_in(t_disc *str, char *param, t_env *env, int err);
+int get_length(char *param, int i, t_env *env, int ret);
+int res_size(int ret);
+int param_malloc(char *param, t_env *env, int err);
+int		is_char(int c);
+char *discovering(char *param, t_env *env, int err);
+
 extern t_sig g_sig;
 
 #endif

@@ -1,5 +1,4 @@
 #include "../minishell.h"
-/////// [parse] //////
 
 int check_quote(t_mini *mini, char *str)
 {
