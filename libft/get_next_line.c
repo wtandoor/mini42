@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/15 14:56:58 by wtandoor          #+#    #+#             */
+/*   Updated: 2021/12/15 14:56:59 by wtandoor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	read_rs(int fd, char *buf, char *l, int rs)
@@ -9,6 +21,7 @@ int	read_rs(int fd, char *buf, char *l, int rs)
 			free(l);
 		return (ft_check_rs(buf, rs));
 	}
+	
 	buf[rs] = '\0';
 	return (rs);
 }
