@@ -1,30 +1,32 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int init_sec_env(t_mini *mini, char **env_ar)
 {
-    t_env *env;
-    t_env *new;
-    int i;
+	t_env *env;
+	t_env *new1;
+	int i;
 
-    env = malloc(sizeof(t_env));
-    if (!env)
-        return (1);
-    env->value = ft_strdup(env_ar[0]);
-    env->next = NULL;
-    mini->sec_env = env;
-    i = 1;
-    while (env_ar && env_ar[0] && env_ar[i])
-    {
-        new = malloc(sizeof(t_env));
-        if (!new)
-            return (1);
-        new->value = ft_strdup(env_ar[i]);
-        new->next = NULL;
-        env->next = new;
-        env = new;
-        i++;
-    }
-    return (0);
+	env = (t_env *)malloc(sizeof(t_env));
+	if (!env)
+		return (1);
+	env->value = ft_strdup(env_ar[0]);
+	env->next = NULL;
+	mini->sec_env = env;
+	i = 1;
+	while (env_ar && env_ar[0] && env_ar[i])
+	{
+		new1 = (t_env *)malloc(sizeof(t_env));
+		if (!new1)
+			return (1);
+		new1->value = ft_strdup(env_ar[i]);
+		new1->next = NULL;
+		env->next = new1;
+		env = new1;
+		i++;
+	}
+	// while (mini->env)
+	// 	printf("%s\n", mini->env->value), mini->env = mini->env->next;
+	return (0);
 }
 
 int count_str_env(char **env)

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int not_valid_str(char *str)
 {
@@ -49,6 +49,7 @@ void    update_shell_lvl(t_env *env)
     char *shlvl;
     char *shlvl_val;
 
+    
     shlvl_val = get_env_val("SHLVL", env);
     if (ft_strcmp(shlvl_val, "") == 0)
         return;
@@ -56,6 +57,7 @@ void    update_shell_lvl(t_env *env)
     delete_memmory(shlvl_val);
     while (env && env->next)
     {
+        
         get_name(env_name, env->value);
         if (ft_strcmp("SHLVL", env_name) == 0)
         {

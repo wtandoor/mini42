@@ -27,6 +27,7 @@ FUNCTIONS = 	ft_isascii.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_memccpy.c \
+				ft_strcmp.c\
 				ft_strdup.c \
 				ft_calloc.c \
 				ft_memmove.c \
@@ -68,6 +69,8 @@ FUNCTIONS = 	ft_isascii.c \
 				sources/search_and_stringfl.c\
 				utoa_f.c\
 				itoa_f.c\
+				ft_strisnum.c\
+				ft_atoi.c\
 
 OBJS += $(FUNCTIONS:.c=.o)
 

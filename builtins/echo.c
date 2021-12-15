@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 int num_args(char **args)
 {
@@ -10,7 +10,7 @@ int num_args(char **args)
     return (i);
 }
 
-int echo(char **args)
+int ft_echo(char **args)
 {
     int i;
     int f;

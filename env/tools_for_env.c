@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 void free_arr2(char **arr)
 {
@@ -23,7 +23,7 @@ char *env_val1(char *env)
     int size;
 
     size = len_env_value(env) + 1;
-    env_val = malloc(sizeof(char) * size);
+    env_val = (char *)malloc(sizeof(char) * size);
     if (!env_val)
         return(NULL);
     i = 0;

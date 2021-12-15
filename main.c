@@ -4,6 +4,6 @@ int main(void)
 {
     char *str = strdup("comma'n'daaa000000comann'dad'cx");
 
-    parser(str);
+    // parser(str);
     return (0);
 }

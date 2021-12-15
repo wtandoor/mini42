@@ -43,6 +43,8 @@ void	*ft_memccpy(void *destination, const void *source, int c, int n);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(int num, int size);
 int		ft_putchar_fd(char c, int fd);
+int		ft_strisnum(const char *str);
+int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_substr(char const *s, unsigned int start, int len);

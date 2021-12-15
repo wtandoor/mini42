@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int str_env_length(char **env)
 {
@@ -34,7 +34,7 @@ char    *env_str(t_env *lst)
     int j;
 
     i = 0;
-    env = malloc(sizeof(char) * get_env_size(lst) + 1);
+    env = (char *)malloc(sizeof(char) * get_env_size(lst) + 1);
     if (!env)
         return (NULL);
     while (lst && lst->next != NULL)
@@ -86,14 +86,17 @@ void    sort(char **arr, int env_length)
         i = 0;
         while (i < env_length - 1)
         {
-            if (ft_strcmp(arr[i], arr[i + 1] > 0))
+            if (arr[i + 1] > 0)
             {
-                temp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = temp;
-                j = 0;
+                if (ft_strcmp(arr[i], arr[i + 1]))
+                {
+                    temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    j = 0;
+                }
+                i++;
             }
-            i++;
         }
         env_length--;
     }

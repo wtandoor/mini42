@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 static	int	function(char *temp, t_flags flags)
 {

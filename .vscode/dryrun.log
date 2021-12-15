@@ -1,0 +1,82 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/ccade/Desktop/mini42/2'
+ 
+make: *** No rule to make target `parser.o', needed by `minishell'.
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o builtins/cd.o builtins/cd.c
+gcc -Wall -Werror -Wextra -I.   -c -o builtins/echo.o builtins/echo.c
+gcc -Wall -Werror -Wextra -I.   -c -o builtins/pwd.o builtins/pwd.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_isascii.o libft/ft_isascii.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_atoilen.o libft/ft_atoilen.c
+ 
+make: *** No rule to make target `builtins/check_buitltin.o', needed by `minishell'.
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_isalnum.o libft/ft_isalnum.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_isalpha.o libft/ft_isalpha.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_isdigit.o libft/ft_isdigit.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_isprint.o libft/ft_isprint.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_tolower.o libft/ft_tolower.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_toupper.o libft/ft_toupper.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strlen.o libft/ft_strlen.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strlcpy.o libft/ft_strlcpy.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strlcat.o libft/ft_strlcat.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strnstr.o libft/ft_strnstr.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strchr.o libft/ft_strchr.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strncmp.o libft/ft_strncmp.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strrchr.o libft/ft_strrchr.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memset.o libft/ft_memset.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_bzero.o libft/ft_bzero.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memcpy.o libft/ft_memcpy.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memchr.o libft/ft_memchr.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memcmp.o libft/ft_memcmp.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memccpy.o libft/ft_memccpy.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strdup.o libft/ft_strdup.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_calloc.o libft/ft_calloc.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_memmove.o libft/ft_memmove.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_putchar_fd.o libft/ft_putchar_fd.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_putstr_fd.o libft/ft_putstr_fd.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_putnbr_fd.o libft/ft_putnbr_fd.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_substr.o libft/ft_substr.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strjoin.o libft/ft_strjoin.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strtrim.o libft/ft_strtrim.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_putendl_fd.o libft/ft_putendl_fd.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_itoa.o libft/ft_itoa.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_strmapi.o libft/ft_strmapi.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_split.o libft/ft_split.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstnew.o libft/ft_lstnew.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstsize.o libft/ft_lstsize.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstlast.o libft/ft_lstlast.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstadd_front.o libft/ft_lstadd_front.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstadd_back.o libft/ft_lstadd_back.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstiter.o libft/ft_lstiter.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstdelone.o libft/ft_lstdelone.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstclear.o libft/ft_lstclear.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_lstmap.o libft/ft_lstmap.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/ft_atoi.o libft/ft_atoi.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/get_next_line.o libft/get_next_line.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/get_next_line_utils.o libft/get_next_line_utils.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/printf.o libft/printf.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/flag_in_string2.o libft/sources/flag_in_string2.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/flag_in_string1.o libft/sources/flag_in_string1.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/flag_edit.o libft/sources/flag_edit.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/flags_init.o libft/sources/flags_init.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_char.o libft/sources/output_char.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_characters.o libft/sources/output_characters.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_id.o libft/sources/output_id.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_p.o libft/sources/output_p.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_percentage.o libft/sources/output_percentage.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_sixteen.o libft/sources/output_sixteen.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_string.o libft/sources/output_string.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output.o libft/sources/output.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/output_u.o libft/sources/output_u.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/sources/search_and_stringfl.o libft/sources/search_and_stringfl.c
+ 
+gcc -Wall -Werror -Wextra -I.   -c -o libft/utoa_f.o libft/utoa_f.c
+gcc -Wall -Werror -Wextra -I.   -c -o libft/itoa_f.o libft/itoa_f.c
+make: Leaving directory `/Users/ccade/Desktop/mini42/2'
+ 
