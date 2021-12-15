@@ -1,10 +1,20 @@
 NAME = minishell
 
-SRCS =	parser.c\
-		builtins/cd.c\
+SRCS =	builtins/cd.c\
 		builtins/check_buitltin.c\
 		builtins/echo.c\
 		builtins/pwd.c\
+		env/env.c\
+		env/shlvl.c\
+		env/sort.c\
+		env/tools_for_env.c\
+		execute/bin.c\
+		execute/for_builtin.c\
+		minishell/minishell.c\
+		minishell/signals.c\
+		minishell/token.c\
+		parse/parse.c\
+		parse/parser.c\
 
 FUNCTIONS = 	libft/ft_isascii.c \
 				libft/ft_atoilen.c \
@@ -95,8 +105,6 @@ $(COMP): $(NAME)
 
 $(NAME): $(HEADERS) $(OBJS)
 		ar rcs minishell.a $(OBJS)
-
-
 
 clean:
 	$(RM) $(OBJS)
