@@ -16,7 +16,6 @@ int ft_unset(char **strs, t_mini *mini)
 	t_env *temp;
 
 	env = mini->env;
-	printf("%s", mini->env->value);
 	if (!(strs[1]))
 		return (SUCCESS);
 	if (ft_strncmp(strs[1], env->value, len_env_value_static(env->value)) == 0)
@@ -30,6 +29,7 @@ int ft_unset(char **strs, t_mini *mini)
 	}
 	while (env && env->next)
 	{
+		// printf("unset :%s\n", env->value);
 		if (ft_strncmp(strs[1], env->next->value, len_env_value_static(env->next->value)) == 0)
 		{
 			temp = env->next->next;
@@ -39,6 +39,11 @@ int ft_unset(char **strs, t_mini *mini)
 		}
 		env = env->next;
 	}
+	// while (mini->env)
+	// 	{
+	// 		printf("unset _ %s\n", mini->env->value);
+	// 		mini->env = mini->env->next;
+	// 	}
 	return (SUCCESS);
 }
 
@@ -77,65 +82,4 @@ void	ft_lstadd_back_m(t_env **lst, t_env *new1)
 		else
 			*lst = new1;
 	}
-}
-
-void init_mini(t_mini *mini)
-{
-    mini->in = dup(STDIN);
-    mini->out = dup(STDOUT);
-    mini->exit = 0;
-    mini->ret = 0;
-    mini->no_exec = 0;
-}
-
-int main(int argc, char **argv, char **env)
-{
-	int i = 0;
-	t_env	*env1;
-	t_env	*tmp;
-	char	*s;
-	t_mini	mini;
-	char **strs;
-	
-	tmp = NULL;
-	env1 = tmp;
-	// while (env[i])
-	// {
-	// 	tmp = ft_lstnew_m(env[i]);
-	// 	ft_lstadd_back_m(&env1, tmp);
-	// 	i++;
-	// }
-	// tmp = env1;
-	// while (env1)
-	// 	printf("%s\n", env1->value), env1 = env1->next;
-	init_mini(&mini);
-	init_env(&mini, env);
-	init_sec_env(&mini, env);
-	printf("mini");
-	strs = (char **)malloc(sizeof(char *) * 3);
-	strs[0] = ft_strdup("asdasdasd");
-	strs[1] = ft_strdup("secarg");
-	strs[2] = NULL;
-	
-	// ft_export(strs, env1, mini.sec_env);
-	
-	ft_unset(strs, &mini);
-	// printf("\n%s\n", mini.sec_env->value);
-	// while (mini.sec_env->next)
-	// {
-	// 	printf("1) %s\n", mini.sec_env->value);
-	// 	mini.sec_env = mini.sec_env->next;
-	// }
-	// printf("hello");
-	// while (mini->sec_env)
-	// 	printf("%s\n", mini->sec_env->value), mini->sec_env = mini->sec_env->next;
-	// update_old_path(env1);
-	// while (env1 && env1->next)
-	// {
-	// 	printf("%s\n", env1->value);
-	// 	env1 = env1->next;
-	// }
-
-	// ft_cd(0, env1);
-	return (0);
 }
