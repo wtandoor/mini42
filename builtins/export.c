@@ -14,7 +14,7 @@ int	valid_env(char *strs)
 		return (0);
 	while (strs[i] && strs[i] != '=')
 	{
-		if (ft_isalnum(strs[i]))
+		if (ft_isalnum(strs[i]) == 0)
 			return (-1);
 		i++;
 	}
@@ -191,10 +191,12 @@ int ft_export(char **strs, t_env *env, t_env *sec_env)
 		if (error <= 0)
 			return (export_error(error, strs[1]));
 		// write (1, "4", 1);
-		if (error == 2)
-			err_new = 1;
-		else
-			err_new = find_env(strs[1], env);
+		// if (error == 2)
+		// 	err_new = 1;
+		// else
+		// 	err_new = find_env(strs[1], env);
+		// printf("%s", env->value);
+		err_new = error == 2 ? 1 : find_env(strs[1], env);
 		// write (1, "5", 1);
 		if (err_new == 0)
 		{
@@ -204,10 +206,10 @@ int ft_export(char **strs, t_env *env, t_env *sec_env)
 		}
 
 	}
-	//  while (minisec_env->next)
+	//  while (sec_env->next)
 	// {
-	// 	printf("1) %s\n", mini.sec_env->value);
-	// 	mini.sec_env = mini.sec_env->next;
+	// 	printf("1) %s\n", sec_env->value);
+	// 	sec_env = sec_env->next;
 	// }
 	return (0);
 }

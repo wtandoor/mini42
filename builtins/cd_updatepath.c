@@ -1,36 +1,5 @@
 #include "../minishell.h"
 
-///ДЛЯ ПРОВЕРКИ EXPORTа
-int init_sec_env(t_mini *mini, char **env_ar)
-{
-    t_env *env;
-    t_env *new1;
-    int i;
-
-    env = (t_env *)malloc(sizeof(t_env));
-    if (!env)
-        return (1);
-    env->value = ft_strdup(env_ar[0]);
-    env->next = NULL;
-    mini->sec_env = env;
-    i = 1;
-    while (env_ar && env_ar[0] && env_ar[i])
-    {
-        new1 = (t_env *)malloc(sizeof(t_env));
-        if (!new1)
-            return (1);
-        new1->value = ft_strdup(env_ar[i]);
-        new1->next = NULL;
-        env->next = new1;
-		env = env->next;
-        i++;
-    }	
-	// while (env)
-	// 	printf("%s", env->value), env = env->next;
-	return (0);
-}
-
-
 ////finds the path////
 char *name_of_env(char *to, char *from)
 {
@@ -77,7 +46,6 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 	t_env *temp;
 	t_env *usable;
 
-	printf("patht: %s\n", path);
 	if (env && env->value == NULL)
 	{
 		env->value = ft_strdup(path);
@@ -86,13 +54,10 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 	usable = (t_env *)malloc(sizeof(t_env));
 	if (!usable)
 		return (-1);
-	usable->value = ft_strdup(path); 
-	while (env && env->next && env->next->next)
-	{
-		printf("%s\n", env->value);
-		env = env->next;
-	}
 
+	usable->value = ft_strdup(path); 
+	while (env && env->next && env->next->next)		//где то тут не ловит
+		env = env->next;
 	temp = env->next;
 	env->next = usable;
 	// printf("temp: %s\n", temp->value);
@@ -123,44 +88,6 @@ int update_old_path(t_env *env)
 	return (SUCCESS);
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-// t_env	*ft_lstnew_m(char *content)
-// {
-// 	t_env	*lst;
-
-// 	lst = (t_env *)malloc(sizeof(t_env));
-// 	if (!lst)
-// 		return (NULL);
-// 	lst->value = content;
-// 	lst->next = NULL;
-// 	return (lst);
-// }
-
-// t_env	*ft_lstlast_m(t_env *lst)
-// {
-// 	if (!lst)
-// 		return (NULL);
-// 	while (lst->next != 0)
-// 		lst = lst->next;
-// 	return (lst);
-// }
-
-// void	ft_lstadd_back_m(t_env **lst, t_env *new1)
-// {
-// 	t_env	*temp;
-
-// 	if (lst)
-// 	{
-// 		if (*lst)
-// 		{
-// 			temp = ft_lstlast_m(*lst);
-// 			temp->next = new1;
-// 		}
-// 		else
-// 			*lst = new1;
-// 	}
-// }
-//////////////////////////////////////////////////////////////////////////////////////////////////
 static char		*path_of_env(t_env *env, const char *var, size_t len) //функция ищет путь, который мы задаем. потом она его пихает в какую-то переменную
 {
 	char *path;
@@ -204,7 +131,7 @@ int go_find_p_env(int variation, t_env *env)
 	path = NULL;
 	if (variation == 0)
 	{
-		path = path_of_env(env, "HOME", 4);// хероботина определяет путь home
+		path = path_of_env(env, "HOME", 4);
 		if (!path)
 			ft_putendl_fd("HOME is missing", 2);
 		if (!path)
@@ -242,32 +169,3 @@ int ft_cd(char **strs, t_env *env)
 	}
 	return (1);
 }
-
-// int main(int argc, char **argv, char **env)
-// {
-//     int i = 0;
-//     t_env *env1;
-//     t_env   *tmp;
-//     char *s;
-    
-//     tmp = NULL;
-//     env1 = tmp;
-//     while (env[i])
-//     {
-//         tmp = ft_lstnew_m(env[i]);
-//         ft_lstadd_back_m(&env1, tmp);
-//         i++;
-//     }
-//     tmp = env1;
-//     // while (env1)
-//         // printf("%s\n", env1->value), env1 = env1->next;
-// 	update_old_path(env1);
-//     // while (env1 && env1->next)
-// 	// {
-// 	// 	printf("%s\n", env1->value);
-// 	// 	env1 = env1->next;
-// 	// }
-
-// 	// ft_cd(0, env1);
-//     return (0);
-// }
