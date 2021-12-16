@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:56:58 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:56:59 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:14:12 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_next_line(int fd, char **line)
 		rs = read_rs(fd, buf, l, rs);
 		if (rs == -1)
 			return (-1);
-		l = ft_strjoin(l, buf);
+		l = ft_strjoin_gnl(l, buf);
 		if (!l)
 			return (ft_check_rs(buf, -1));
 	}

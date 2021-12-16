@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:38:47 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 18:08:07 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:17:59 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,9 +241,9 @@ void parse(t_mini *mini)
     signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
     if (mini->ret)
-        ft_putstr_fd("ERROR", STDERR);
+        ft_putstr_fd("ERROR\n", STDERR);
     else
-        ft_putstr_fd("Not, ERROR", STDERR);
+        ft_putstr_fd("Not, ERROR\n", STDERR);
     ft_putstr_fd("minishell ▸ ", STDERR);
     if (get_next_line(0, &str) == -1)
     {
