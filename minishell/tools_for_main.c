@@ -5,7 +5,7 @@ int		line_check(t_mini *mini, t_token *token)
 	while (token)
 	{
 		if (is_type(token, "TAI")
-		&& (!token->next || is_a_t(token->next, "TAIPE")))
+		&& (!token->next || is_type(token->next, "TAIPE")))
 		{
 			ft_putstr_fd("bash: syntax error near unexpected token `", STDERR);
 			token->next ? ft_putstr_fd(token->next->str, STDERR) : 0;

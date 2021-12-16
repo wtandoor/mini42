@@ -6,11 +6,11 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:38 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:55:39 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:09:29 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	search_flags(t_flags *flags, char *s1)
 {

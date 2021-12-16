@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:57:10 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:57:11 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:56:39 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 }		t_list;
 
 int		ft_isprint(int ch);
+int	ft_atoi(const char *str);
 int		ft_isascii(int ch);
 int		ft_tolower(int c);
 int		ft_toupper(int c);

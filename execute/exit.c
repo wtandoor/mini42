@@ -1,5 +1,23 @@
 #include "../minishell.h"
 
+static int	ft_strisnum(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	if (str[0] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	mini_exit(t_mini *mini, char **cmd)
 {
 	mini->exit = 1;

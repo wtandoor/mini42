@@ -62,7 +62,7 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 	}
 	if (ft_isdigit(arg[pos]))
 		return (NULL);
-	while (arg[pos] && is_env_char(arg[pos]) == 1 && i < BUFF_SIZE)
+	while (arg[pos] && env_char(arg[pos]) == 1 && i < BUFF_SIZE)
 	{
 		var_name[i] = arg[pos];
 		pos++;

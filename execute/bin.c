@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:38:32 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:54:18 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:52:30 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*check_dir(char *str, char *cmd)
 	while (item)
 	{
 		if (ft_strcmp(item->d_name, cmd) == 0)
-			path = path_join(str, item->d_name);
+			path = join_path(str, item->d_name);
 		item = readdir(folder);
 	}
 	closedir(folder);
@@ -148,7 +148,7 @@ char	**create_tab(t_token *token)
 		token1 = token1->next;
 		i++;
 	}
-	tab = (char *)malloc(sizeof(char *) * i);
+	tab = (char **)malloc(sizeof(char *) * i);
 	if (!tab)
 		return (NULL);
 	token1 = token->next;
@@ -192,11 +192,14 @@ void	execute_command(t_mini *mini, t_token *token)
 	i = 0;
 	command = create_tab(token);
 	while (command && command[i])
-		command[i] = discovering(command[i++], mini->env, mini->ret);
+	{
+		command[i] = discovering(command[i], mini->env, mini->ret);
+		i++;
+	}
 	if (command && ft_strcmp(command[0], "exit") == 0 && are_pipe(token) == 0)
 		mini_exit(mini, command);
 	else if (command && is_builtin_command(command[0]))
-		mini->ret = execute_builtin(command, mini);
+		mini->ret = execute_builtn(command, mini);
 	else if (command)
 		mini->ret = execute_bin(command, mini->env, mini);
 	free_arr2(command);

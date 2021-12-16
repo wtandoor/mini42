@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:38:47 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 15:42:31 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:08:07 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int quote(char *line, int i)
         else if (start == 0 && line[j] == '\"')
             start = 1;
         else if (start == 0 && line[j] == '\'')
-            start == 2;
+            start = 2;
         else if (start == 1 && line[j] == '\"')
             start = 0;
         else if (start == 2 && line[j] == '\'')
@@ -253,7 +253,7 @@ void parse(t_mini *mini)
         mini->ret = g_sig.exit_status;
     if (check_quote(mini, &str))
         return ;
-    str = str_new(str);//check //ЧТО ЭТО?!
+    str = space_line(str);//check //ЧТО ЭТО?!
     if (str && str[0] == '$')
         str[0] = (char)(-str[0]);
     mini->start = tokens(str);
@@ -263,7 +263,7 @@ void parse(t_mini *mini)
     while (token)
     {
         if (type_search(token, 2))//check
-            type_arg(token, 0);//dopisat' ..init_args 
+            init_args(token, 0);//dopisat' ..init_args 
         token = token->next;
     }
 }
@@ -282,14 +282,14 @@ void var_in(t_disc *str, char *param, t_env *env, int err)
 {
     char *env_val;
 
-    env_val = var_value(param, str->j, env, err);///get_var_value
+    env_val = get_var_value(param, str->j, env, err);///get_var_value
     if (env_val)
         str->i += copy_var(str->new1, env_val, str->i);//varlcpy //complete
     else
         str->i += 0;
     delete_memmory(env_val);
     if (ft_isdigit(param[str->j]) == 0 && param[str->j - 1] != '?')
-        while(is_char(param[str->j]) == 1)//is_env_char
+        while(env_char(param[str->j]) == 1)//is_env_char
             str->j++;
     else
         if (param[str->j - 1] != '?')
@@ -318,7 +318,7 @@ int get_length(char *param, int i, t_env *env, int ret)
         return (res_size(ret)); //ret_size //comp
     if (ft_isdigit(param[i]))
         return (0);
-    while (param[i] && is_char(param[i]) == 1 && i < 4096)
+    while (param[i] && env_char(param[i]) == 1 && i < 4096)
     {
         name_var[l] = param[i];
         i++;
@@ -349,7 +349,7 @@ int param_malloc(char *param, t_env *env, int err)
                 size += get_length(param, i, env, err); //get_var_len //comp
             if (ft_isdigit(param[i]) == 0)
             {
-                while (param[i + 1] && is_char(param[i]))
+                while (param[i + 1] && env_char(param[i]))
                     i++;
             }
             else

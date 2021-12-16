@@ -25,10 +25,10 @@ SRCS =	builtins/cd.c\
 		minishell/tools_for_main.c\
 		parse/free.c\
 		parse/parse.c\
-		parse/parser.c\
 		parse/tools_for_parse.c\
 
 FUNCTIONS = 	libft/ft_isascii.c \
+				libft/ft_atoi.c\
 				libft/ft_atoilen.c \
 				libft/ft_isalnum.c \
 				libft/ft_isalpha.c \
@@ -90,6 +90,7 @@ FUNCTIONS = 	libft/ft_isascii.c \
 				libft/sources/output_u.c\
 				libft/sources/search_and_stringfl.c\
 				libft/utoa_f.c\
+				libft/ft_strcmp.c\
 				libft/itoa_f.c\
 
 LIBFT_HEADER = libft/libft.h

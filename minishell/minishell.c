@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:33:52 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 15:35:52 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:59:48 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void    init_env(t_mini *mini, char **env)
 
 	env1 = (t_env *)malloc(sizeof(t_env));
 	if (!env1)
-		return (1);
+		return ;
 	env1->value = ft_strdup(env[0]);
 	env1->next = NULL;
-	mini->env = env;
+	mini->env = env1;
 	i = 1;
 	while (env1 && env[0] && env[i])
 	{
 		new = (t_env *)malloc(sizeof(t_env));
 		if (!new)
-			return (1);
+			return ;
 		new->value = ft_strdup(env[i++]);
 		new->next = NULL;
 		env1->next = new;
@@ -203,6 +203,7 @@ int is_type(t_token *token, char *type)
 		return (1);
 	else if (ft_strchr(type, 'E') && type_search(token, 7))
 		return (1);
+	return (0);
 }
 
 void    mshell(t_mini *mini)
