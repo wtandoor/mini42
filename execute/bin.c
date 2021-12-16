@@ -148,7 +148,7 @@ char	**create_tab(t_token *token)
 		token1 = token1->next;
 		i++;
 	}
-	tab = malloc(sizeof(char *) * i);
+	tab = (char *)malloc(sizeof(char *) * i);
 	if (!tab)
 		return (NULL);
 	token1 = token->next;
@@ -161,6 +161,25 @@ char	**create_tab(t_token *token)
 	}
 	tab[i] = NULL;
 	return (tab);
+}
+
+int		is_a_type(t_token *token, int type)
+{
+	if (token && token->type == type)
+		return (1);
+	else
+		return (0);
+}
+
+int		are_pipe(t_token *token)
+{
+	while (token && is_a_type(token, END) == 0)
+	{
+		if (is_a_type(token, PIPE))
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }
 
 void	execute_command(t_mini *mini, t_token *token)

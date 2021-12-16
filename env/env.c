@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -10,23 +9,14 @@
 /*   Updated: 2021/12/15 14:32:25 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-=======
-#include "../minishell.h"
->>>>>>> b795c8ff52dc15f32bf0296c74939d7d2d92ede3
 
 #include "../minishell.h"
 
 int	init_sec_env(t_mini *mini, char **env_ar)
 {
-<<<<<<< HEAD
-	t_env	*env;
-	t_env	*new;
-	int		i;
-=======
 	t_env *env;
 	t_env *new1;
 	int i;
->>>>>>> b795c8ff52dc15f32bf0296c74939d7d2d92ede3
 
 	env = (t_env *)malloc(sizeof(t_env));
 	if (!env)
@@ -37,17 +27,6 @@ int	init_sec_env(t_mini *mini, char **env_ar)
 	i = 1;
 	while (env_ar && env_ar[0] && env_ar[i])
 	{
-<<<<<<< HEAD
-		new = malloc(sizeof(t_env));
-		if (!new)
-			return (1);
-		new->value = ft_strdup(env_ar[i]);
-		new->next = NULL;
-		env->next = new;
-		env = new;
-		i++;
-	}
-=======
 		new1 = (t_env *)malloc(sizeof(t_env));
 		if (!new1)
 			return (1);
@@ -59,7 +38,6 @@ int	init_sec_env(t_mini *mini, char **env_ar)
 	}
 	// while (mini->env)
 	// 	printf("%s\n", mini->env->value), mini->env = mini->env->next;
->>>>>>> b795c8ff52dc15f32bf0296c74939d7d2d92ede3
 	return (0);
 }
 

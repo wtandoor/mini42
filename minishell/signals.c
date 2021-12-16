@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	siq_quit(int bits)
+void	sig_quit(int bits)
 {
 	char	*n;
 

@@ -44,3 +44,23 @@ t_token	*next_ex(t_token *token, int i)
 	}
 	return (token);
 }
+
+void	type_arg(t_token *token, int separator)
+{
+	if (ft_strcmp(token->str, "") == 0)
+		token->type = EMPTY;
+	else if (ft_strcmp(token->str, ">") == 0 && separator == 0)
+		token->type = TRUNC;
+	else if (ft_strcmp(token->str, ">>") == 0 && separator == 0)
+		token->type = APPEND;
+	else if (ft_strcmp(token->str, "<") == 0 && separator == 0)
+		token->type = INPUT;
+	else if (ft_strcmp(token->str, "|") == 0 && separator == 0)
+		token->type = PIPE;
+	else if (ft_strcmp(token->str, ";") == 0 && separator == 0)
+		token->type = END;
+	else if (token->prev == NULL || token->prev->type >= TRUNC)
+		token->type = CMD;
+	else
+		token->type = ARG;
+}

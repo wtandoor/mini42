@@ -1,20 +1,32 @@
 NAME = minishell
 
 SRCS =	builtins/cd.c\
-		builtins/check_buitltin.c\
+		builtins/cd_updatepath.c\
 		builtins/echo.c\
 		builtins/pwd.c\
+		builtins/export.c\
+		builtins/error.c\
+		builtins/export2_sort.c\
+		builtins/free_memo.c\
+		builtins/libft.c\
+		builtins/unset.c\
+		builtins/unset2_finc.c\
 		env/env.c\
 		env/shlvl.c\
 		env/sort.c\
 		env/tools_for_env.c\
 		execute/bin.c\
+		execute/exit.c\
+		execute/ft_env.c\
 		execute/for_builtin.c\
 		minishell/minishell.c\
 		minishell/signals.c\
 		minishell/token.c\
+		minishell/tools_for_main.c\
+		parse/free.c\
 		parse/parse.c\
 		parse/parser.c\
+		parse/tools_for_parse.c\
 
 FUNCTIONS = 	libft/ft_isascii.c \
 				libft/ft_atoilen.c \

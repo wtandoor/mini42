@@ -35,16 +35,16 @@ int	execute_builtn(char **arg, t_mini *mini)
 
 	res = 0;
 	if (ft_strcmp(arg[0], "cd") == 0)
-		res = cd(arg);
+		res = ft_cd(arg, mini->env);
 	if (ft_strcmp(arg[0], "pwd") == 0)
-		res = pwd(arg);
+		res = pwd();
 	if (ft_strcmp(arg[0], "echo") == 0)
-		res = echo(arg);
+		res = ft_echo(arg);
 	if (ft_strcmp(arg[0], "env") == 0)
-		res = env(arg);
+		res = ft_env(arg);
 	if (ft_strcmp(arg[0], "export") == 0)
-		res = export(arg);
+		res = ft_export(arg, mini->env, mini->sec_env);
 	if (ft_strcmp(arg[0], "unset") == 0)
-		res = unset(arg);
+		res = ft_unset(arg, mini);
 	return (res);
 }

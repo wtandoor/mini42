@@ -71,12 +71,3 @@ int	len_env_value(char *env)
 	return (size);
 }
 
-void	*delete_memmory(void *str)
-{
-	if (str)
-	{
-		free(str);
-		str = NULL;
-	}
-	return (NULL);
-}

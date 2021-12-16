@@ -98,7 +98,7 @@ void	sort(char **arr, int env_length)
 		i = 0;
 		while (i < env_length - 1)
 		{
-			if (ft_strcmp(arr[i], arr[i + 1] > 0))
+			if (ft_strcmp(arr[i], arr[i + 1] )> 0)
 			{
 				temp = arr[i];
 				arr[i] = arr[i + 1];

@@ -45,7 +45,7 @@ void    init_env(t_mini *mini, char **env)
 	i = 1;
 	while (env1 && env[0] && env[i])
 	{
-		new = malloc(sizeof(t_env));
+		new = (t_env *)malloc(sizeof(t_env));
 		if (!new)
 			return (1);
 		new->value = ft_strdup(env[i++]);
@@ -245,7 +245,7 @@ int main(int argc, char **argv, char **env)
 	init_fds(&mini);
 	init_env(&mini, env);
 	init_sec_env(&mini, env);
-	update_shell_level(mini.env);
+	update_shell_lvl(mini.env);
 	while (mini.exit == 0)
 	{
 		init_sig();

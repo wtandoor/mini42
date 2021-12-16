@@ -1,10 +1,5 @@
 #include "../minishell.h"
 
-// FOR EXPORT gcc builtins/cd_updatepath.c  builtins/free_memo.c -g builtins/libft.c libft/ft_putendl_fd.c 
-// libft/ft_strncmp.c libft/ft_putstr_fd.c builtins/error.c builtins/export.c libft/ft_isalnum.c libft/ft_isdigit.c libft/ft_isalpha.c 
-
-
-
 int	valid_env(char *strs)
 {
 	int i;
@@ -112,40 +107,6 @@ void	free_buff_n(char **tab)
 		free_memo(tab);
 }
 
-// void sort_env_write(t_env *sec_env)
-// {
-// 	char *str_env;
-// 	char **buff_n;
-// 	int i;
-
-// 	i = 0;
-// 	str_env = str_of_env(sec_env);
-// 	// while (str_env)
-// 		// printf("pi \n");
-// 	// printf(" \n\n2ND%s", str_env);
-// 	// printf("%s", str_env);
-// 	// buff_n = ft_split(str_env, '\n');
-// 	// printf("pi \n");
-// 	int j = 0;
-// 	// printf(" pilp%s", buff_n[1]);
-// 	// while (buff_n[j])
-// 	// {
-// 	// 	printf("j = %d: %s\n", j ,buff_n[j]), j++;
-// 	// }
-// 	free_memo(str_env);
-// 	sort_buff(buff_n, len_of_env(buff_n));
-// 	// while (buff_n[i])
-// 	// {
-// 	// 	ft_putstr_fd("declare -x ", 1);
-// 	// 	ft_putendl_fd(buff_n[i], 1);
-// 	// 	i++;
-// 	// }
-// 		// int j = 0;
-// 	// while (buff[j])
-// 	// 		printf("%s\n", buff[j]), j++;
-// 	free_memo(buff_n);
-
-// }
 
 int export_error(int err, char *strs)
 {
