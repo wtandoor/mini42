@@ -69,6 +69,6 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 		i++;
 	}
 	var_name[i] = '\0';
-	var_value = get_env_value(var_name, env);
+	var_value = get_env_val(var_name, env);
 	return (var_value);
 }

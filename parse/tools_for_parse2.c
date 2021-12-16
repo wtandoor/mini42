@@ -54,3 +54,13 @@ char		*get_env_name(char *dest, const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+int separation(char *buff, int i)
+{
+    if (i > 0 && buff[i - 1] && ft_strchr("<>|;", buff[i]))
+        return (0);
+    else if (ft_strchr("<>|;", buff[i]) && quote(buff, i) == 0)
+        return (1);
+    else
+        return (0);
+}

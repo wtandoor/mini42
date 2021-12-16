@@ -244,6 +244,7 @@ void parse(t_mini *mini)
         ft_putstr_fd("ERROR", STDERR);
     else
         ft_putstr_fd("Not, ERROR", STDERR);
+    ft_putstr_fd("minishell ▸ ", STDERR);
     if (get_next_line(0, &str) == -1)
     {
         mini->exit = 1;

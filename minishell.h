@@ -85,7 +85,7 @@ typedef struct s_mini
 	int no_exec;
 }               t_mini;
 
-void    parser(t_mini *mini);
+void parse(t_mini *mini);
 int		env_char(int c);
 char    *ft_quote(char *str, int *i);
 int		skip_separator(char *str, int i);
@@ -127,8 +127,6 @@ int quote(char *line, int i);
 char	*space_line(char *line);
 char	*space_alloc(char *line);
 char	*get_var_value(const char *arg, int pos, t_env *env, int ret);
-char	*get_env_value(char *arg, t_env *env);
-
 
 //tools_for_parse2.c
 int		env_value_len(const char *env);

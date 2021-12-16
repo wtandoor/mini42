@@ -19,13 +19,14 @@ SRCS =	builtins/cd.c\
 		execute/exit.c\
 		execute/ft_env.c\
 		execute/for_builtin.c\
-		minishell/minishell.c\
-		minishell/signals.c\
-		minishell/token.c\
-		minishell/tools_for_main.c\
+		minishell1/minishell.c\
+		minishell1/signals.c\
+		minishell1/token.c\
+		minishell1/tools_for_main.c\
 		parse/free.c\
 		parse/parse.c\
 		parse/tools_for_parse.c\
+		parse/tools_for_parse2.c\
 
 FUNCTIONS = 	libft/ft_isascii.c \
 				libft/ft_atoi.c\
@@ -114,7 +115,7 @@ OBJS += $(FUNCTIONS:.c=.o)
 all: $(NAME) $(COMP)
 
 $(COMP): $(NAME) 
-			$(CC) $(CFLAGS) minishell.c minishell.a -o $(NAME)
+			$(CC) $(CFLAGS) minishell1/minishell.c minishell.a -o $(NAME)
 
 $(NAME): $(HEADERS) $(OBJS)
 		ar rcs minishell.a $(OBJS)
