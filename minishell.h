@@ -86,7 +86,9 @@ typedef struct s_mini
 }               t_mini;
 
 void    parser(t_mini *mini);
+int		env_char(int c);
 char    *ft_quote(char *str, int *i);
+int		skip_separator(char *str, int i);
 // char	*ft_substr(char *s, unsigned int start, int len);
 // char	*ft_strjoin(char *s1, char *s2);
 // int     ft_strlen(char *string);
