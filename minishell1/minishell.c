@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:33:52 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 15:16:41 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:21:28 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int pipe_ex(t_mini *mini)
 void    input(t_mini *mini, t_token *token)
 {
 	ft_close(mini->fdin);
-	mini->fdin = open(token->str, S_IRWXU , O_RDONLY);
+	mini->fdin = open(token->str, O_RDONLY, S_IRWXU);
 	if (mini->fdin == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -137,16 +137,16 @@ void    input(t_mini *mini, t_token *token)
 		mini->no_exec = 1;
 		return ;
 	}
-	dup2(mini->fdout, 1);
+	dup2(mini->fdin, 0);
 }
 
 void    redirect(t_mini *mini, t_token *token, int i)
 {
 	ft_close(mini->fdout);
 	if (i == 3)
-		mini->fdout = open(token->str, O_TRUNC | O_WRONLY | O_CREAT, S_IRWXU);
+		mini->fdout = open(token->str, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
 	else
-		mini->fdout = open(token->str, O_APPEND | O_WRONLY | O_CREAT, S_IRWXU);
+		mini->fdout = open(token->str, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
 	if (mini->fdout == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);

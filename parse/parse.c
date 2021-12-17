@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:38:47 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 14:53:07 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:22:11 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,28 +108,29 @@ t_token *add_token(char *s, int *i)
     token->str = (char *)malloc(sizeof(char) * next_a(s, i)); //next_alloc //comp
     if (!token || !token->str)
         return (NULL);
-    while (s[*i] && (s[*i]!= '\'' || a != ' '))
-    {
-        if (a == ' ' && (s[*i] == '\'' || s[*i] == '\"'))
-            a = s[(*i)++];
-        else if (a != ' ' && s[*i] == a)
-        {
-            a = ' ';
-            (*i)++;
-        }
-        else if (s[*i] == '\\' && (*i)++)
-            token->str[j++] = s[(*i)++];
-        else
-            token->str[j++] = s[(*i)++];
-    }
+    while (s[*i] && (s[*i] != ' ' || a != ' '))
+	{
+		if (a == ' ' && (s[*i] == '\'' || s[*i] == '\"'))
+			a = s[(*i)++];
+		else if (a != ' ' && s[*i] == a)
+		{
+			a = ' ';
+			(*i)++;
+		}
+		else if (s[*i] == '\\' && (*i)++)
+			token->str[j++] = s[(*i)++];
+		else
+			token->str[j++] = s[(*i)++];
+	}
     token->str[j] = '\0';
     return (token);
 }
 
 void skip_chars(char *str, int *i)
 {
-    while((str[*i] == ' ' || str[*i] == '\t') || (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-        (*i)++;
+    while ((str[*i] == ' ' || str[*i] == '\t')
+	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
+		(*i)++;
 }
 
 t_token *tokens(char *str)
@@ -149,7 +150,7 @@ t_token *tokens(char *str)
         next = add_token(str, &i); //next_token //comp
         next->prev = prev;
         if (prev)
-            prev->next = prev;
+            prev->next = next;
         prev = next;
         init_args(next, separator); //type_arg // comp 
         skip_chars(str, &i);//comp
@@ -176,9 +177,9 @@ int skip_separator(char *str, int i)
 
 int is_separator(char *str, int i)
 {
-    if (i > 0 && str[i - 1] == '\\' && ft_strchr("><;|", str[i]))
+    if (i > 0 && str[i - 1] == '\\' && ft_strchr("<>|;", str[i]))
         return (0);
-    else if (ft_strchr("><;|", str[i]) && quote(str, i) == 0)
+    else if (ft_strchr("<>|;", str[i]) && quote(str, i) == 0)
         return (0);
     else
         return (0);

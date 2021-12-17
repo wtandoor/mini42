@@ -6,7 +6,7 @@ char *name_of_env(char *to, char *from)
 	int i;
 
 	i = 0;
-	while (from[i] && from[i] != '=')
+	while (from[i] && from[i] != '=' && ft_strlen(from) < 4096)
 	{
 		to[i] = from[i];
 		i++;
@@ -18,7 +18,7 @@ char *name_of_env(char *to, char *from)
 ///compares oldENV with the new one////
 int find_env(char *old_path, t_env *env)
 {
-	char old_one[PATH];
+	char old_one[PATH];//var_name
 	char new_one[PATH];
 
 	name_of_env(old_one, old_path);//finds the name of path
@@ -27,24 +27,19 @@ int find_env(char *old_path, t_env *env)
 		name_of_env(new_one, env->value);//bring the path of enviroments and put them to new_one var
 		if (ft_strcmp(old_one, new_one) == 0)
 		{
-			// free_memo(env->value);///------------------FAIL!!!!!!!!!!!!!!!!!!!!!!!!
-			printf("env->value before  :%s\n", env->value);
-			env->value = ft_strdup(old_path);
-			printf("env->value after :%s\n", env->value);
-			
+			delete_memmory(env->value);
+			env->value = ft_strdup(old_path);	
 			return (1);
 		}
-		// printf("%d IN FUNC: %s\n\n", i, env->value);
 		env = env->next;
-	}
-	
+	}	
 	return (0);
 }
 
 int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в предидущей он не нашелся
 {
 	t_env *temp;
-	t_env *usable;
+	t_env *usable;//new
 
 	if (env && env->value == NULL)
 	{
@@ -54,7 +49,6 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 	usable = (t_env *)malloc(sizeof(t_env));
 	if (!usable)
 		return (-1);
-
 	usable->value = ft_strdup(path); 
 	while (env && env->next && env->next->next)		//где то тут не ловит
 		env = env->next;
@@ -77,7 +71,6 @@ int update_old_path(t_env *env)
 	if (cwd == NULL)
 		return (ERROR);
 	old_path = ft_strjoin("OLDPWD=", cwd); //записал место, где мы находимся сейчас
-	// printf(" old_path____: %s\n", old_path);
 	if (!old_path)
 		return (ERROR);
 	if (find_env(old_path, env) == 0) //если программа завершилась успешно, перед этим мы в oldpath добавили дирректорию, которая будет устаревшей при следующем  переходе
@@ -102,21 +95,15 @@ static char		*path_of_env(t_env *env, const char *var, size_t len) //функц�
 		if (!ft_strncmp(env->value, var, len))
 		{
 			length = ft_strlen(env->value) - len;
-			path = (char *)malloc(sizeof(char *) * length + 1);
+			path = (char *)malloc(sizeof(char) * length + 1);
 			if (!path)
 				return (NULL);
-			while (env->value[i])
+			while (env->value[i++])
 			{
 				if(i > (int)len)
-				{
-					path[h] = env->value[i];
-					h++;
-					// printf("%s\n", path);
-				}
-				i++;
+					path[h++] = env->value[i];
 			}
 			path[h] = '\0';
-			printf("%s\n", path);
 			return (path);
 		}
 		env = env->next;
@@ -127,26 +114,30 @@ static char		*path_of_env(t_env *env, const char *var, size_t len) //функц�
 int go_find_p_env(int variation, t_env *env)
 {
 	char *path;
+	int i;
 
 	path = NULL;
 	if (variation == 0)
 	{
+		update_old_path(env);
 		path = path_of_env(env, "HOME", 4);
 		if (!path)
 			ft_putendl_fd("HOME is missing", 2);
 		if (!path)
 			return (ERROR);
 	}
-	if (variation == 1) 
+	else if (variation == 1) 
+	{
 		path = path_of_env(env, "OLDPWD", 6);
 		if (!path)
-		{
 			ft_putendl_fd("OLDPWD is missing", 2);
-		}
 		if (!path)
 			return (ERROR);
-		free_memo(path);
-	return (1);
+		update_old_path(env);
+	}
+	i = chdir(path);
+	free_memo(path);
+	return (i);
 
 }
 
@@ -154,7 +145,7 @@ int ft_cd(char **strs, t_env *env)
 {
 	int cd_val;
 
-	if (!strs)
+	if (!strs[1])
 		return (go_find_p_env(0, env));
 	if (ft_strcmp(strs[1], "-") == 0)
 		cd_val = go_find_p_env(1, env);
@@ -167,5 +158,5 @@ int ft_cd(char **strs, t_env *env)
 		if (cd_val != 0)
 			error(strs);
 	}
-	return (0);
+	return (cd_val);
 }

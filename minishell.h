@@ -189,6 +189,7 @@ char		**ft_split(char const *s, char c);
 //----------------
 
 
+
 //EXECUTE//
 //bin
 int			box(char *path, char **arg, t_env *env, t_mini *mini);

@@ -1,7 +1,6 @@
 NAME = minishell
 
-SRCS =	builtins/cd.c\
-		builtins/cd_updatepath.c\
+SRCS =	builtins/cd_updatepath.c\
 		builtins/echo.c\
 		builtins/pwd.c\
 		builtins/export.c\
@@ -112,13 +111,11 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS += $(FUNCTIONS:.c=.o)
 
-all: $(NAME) $(COMP)
+all: $(NAME)
 
-$(COMP): $(NAME) 
-			$(CC) $(CFLAGS) minishell1/minishell.c minishell.a -o $(NAME)
-
-$(NAME): $(HEADERS) $(OBJS)
+$(NAME): $(OBJS) $(HEADERS)
 		ar rcs minishell.a $(OBJS)
+		gcc -Wall -Werror -Wextra minishell1/minishell.c minishell.a -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)

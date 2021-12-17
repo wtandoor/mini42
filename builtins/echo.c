@@ -26,7 +26,6 @@ int ft_echo(char **args)
             n = 1;
             i++;
         }
-        printf("%d\n", n);
         while (args[i])
         {
             if (args[i + 1] && n == 1)
@@ -39,5 +38,5 @@ int ft_echo(char **args)
     }
     if (n == 0)
         write(1, "\n", 1);
-    return (1);
+    return (0);
 }

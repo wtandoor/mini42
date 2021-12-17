@@ -143,34 +143,18 @@ int ft_export(char **strs, t_env *env, t_env *sec_env)
 	}
 	else
 	{
-		// write (1, "2", 1);
 		error = valid_env(strs[1]);
-		// write (1, "2", 1);
 		if (strs[1][0] == '=')
 			error = -3;
-		// write (1, "3", 1);
 		if (error <= 0)
 			return (export_error(error, strs[1]));
-		// write (1, "4", 1);
-		// if (error == 2)
-		// 	err_new = 1;
-		// else
-		// 	err_new = find_env(strs[1], env);
-		// printf("%s", env->value);
 		err_new = error == 2 ? 1 : find_env(strs[1], env);
-		// write (1, "5", 1);
 		if (err_new == 0)
 		{
 			if (error == 1)
 				add_env(strs[1], env);
 			add_env(strs[1], sec_env);
 		}
-
 	}
-	//  while (sec_env->next)
-	// {
-	// 	printf("1) %s\n", sec_env->value);
-	// 	sec_env = sec_env->next;
-	// }
 	return (0);
 }

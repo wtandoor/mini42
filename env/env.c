@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:32:12 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:32:25 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:15:15 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	init_sec_env(t_mini *mini, char **env_ar)
 		env = new1;
 		i++;
 	}
-	// while (mini->env)
-	// 	printf("%s\n", mini->env->value), mini->env = mini->env->next;
 	return (0);
 }
 
