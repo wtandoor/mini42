@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:33:52 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 15:35:52 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:16:41 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    init_fds(t_mini *mini)
 	mini->pid = -1;
 }
 
-void    init_env(t_mini *mini, char **env)
+int    init_env(t_mini *mini, char **env)
 {
 	t_env   *env1;
 	t_env   *new;
@@ -41,20 +41,22 @@ void    init_env(t_mini *mini, char **env)
 
 	env1 = (t_env *)malloc(sizeof(t_env));
 	if (!env1)
-		return ;
+		return (1);
 	env1->value = ft_strdup(env[0]);
 	env1->next = NULL;
 	mini->env = env1;
 	i = 1;
-	while (env1 && env[0] && env[i])
+	while (env && env[0] && env[i])
 	{
 		new = (t_env *)malloc(sizeof(t_env));
 		if (!new)
-			return ;
+			return (1);
 		new->value = ft_strdup(env[i++]);
 		new->next = NULL;
 		env1->next = new;
+		env1 = new;
 	}
+	return (0);
 }
 
 void    delete_token(t_token *start)

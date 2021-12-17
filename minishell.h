@@ -173,7 +173,7 @@ int	valid_env(char *strs);
 int export_error(int err, char *strs);
 int ft_export(char **strs, t_env *env, t_env *sec_env);
 
-void    init_env(t_mini *mini, char **env);
+int    init_env(t_mini *mini, char **env);
 void    ft_error(char **strs);
 void	close_fd(t_mini *mini);
 void    init_fds(t_mini *mini);

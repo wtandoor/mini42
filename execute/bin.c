@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:38:32 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 17:52:30 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:13:11 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ char	*check_dir(char *str, char *cmd)
 	folder = opendir(str);
 	if (!folder)
 		return (NULL);
-	item = readdir(folder);
-	while (item)
+	
+	while ((item = readdir(folder)))
 	{
 		if (ft_strcmp(item->d_name, cmd) == 0)
 			path = join_path(str, item->d_name);
-		item = readdir(folder);
 	}
 	closedir(folder);
 	return (path);
@@ -115,7 +114,7 @@ int	execute_bin(char **arg, t_env *env, t_mini *mini)
 
 	i = 0;
 	res = 127;
-	while (env && env->value && ft_strncmp(env->value, "PATH", 5) != 0)
+	while (env && env->value && ft_strncmp(env->value, "PATH=", 5) != 0)
 		env = env->next;
 	if (env == NULL || env->next == NULL)
 		return (box(arg[0], arg, env, mini));
@@ -124,6 +123,8 @@ int	execute_bin(char **arg, t_env *env, t_mini *mini)
 		return (1);
 	i = 1;
 	path = check_dir(bin[0] + 5, arg[0]);
+	while (arg[0] && bin[i] && path == NULL)
+		path = check_dir(bin[i++], arg[0]);
 	if (path != NULL)
 		res = box(path, arg, env, mini);
 	else

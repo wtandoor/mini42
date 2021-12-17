@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:37:49 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 17:58:18 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:46:04 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	execute_builtn(char **arg, t_mini *mini)
 	if (ft_strcmp(arg[0], "echo") == 0)
 		res = ft_echo(arg);
 	if (ft_strcmp(arg[0], "env") == 0)
-		res = ft_env(mini->env);
+		ft_env(mini->env);
 	if (ft_strcmp(arg[0], "export") == 0)
-		res = ft_export(arg, mini->env, mini->sec_env);
+		ft_export(arg, mini->env, mini->sec_env);
 	if (ft_strcmp(arg[0], "unset") == 0)
-		res = ft_unset(arg, mini);
+		ft_unset(arg, mini);
 	return (res);
 }

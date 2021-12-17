@@ -167,5 +167,5 @@ int ft_cd(char **strs, t_env *env)
 		if (cd_val != 0)
 			error(strs);
 	}
-	return (1);
+	return (0);
 }
