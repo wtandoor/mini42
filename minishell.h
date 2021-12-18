@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:30:19 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 18:36:27 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:58:31 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ size_t	get_env_size(t_env *lst);
 void	print_new_env(t_env *env);
 char	*env_str(t_env *lst);
 int		str_env_length(char **env);
+void	sort(char **arr, int env_length);
 ///tools_for_env.c///
 char	*env_val1(char *env);
 int		env_char(int c);
@@ -178,6 +179,9 @@ int		check_quote(t_mini *mini, char **str);
 char	*discovering(char *s, t_env *env, int err);
 int		get_length(char *param, int i, t_env *env, int ret);
 int		param_malloc(char *s, t_env *env, int err);
+void	parse(t_mini *mini);
+void	take_args(t_mini *mini);
+t_token	*tokens(char *str);
 
 ///[builtns]///
 
@@ -194,11 +198,13 @@ int		len_struct(t_env *env);
 int		valid_env(char *strs);
 
 //export2.c
+void	sort_env1(char **tab, int env_len);
 int		ft_export(char **strs, t_env *env, t_env *sec_env);
 int		str_env_len(char **env);
 int		export_error(int err, char *strs);
 void	free_buff_n(char **tab);
-
+void	error(char **strs);
+int		update_old_path(t_env *env);
 //free_memmo.c
 void	*free_memo(void *s);
 
@@ -211,6 +217,13 @@ int		ft_echo(char **args);
 int		num_args(char **args);
 //pwd.c
 int		pwd(void);
+
+//cs_update_path.c
+int		find_env(char *old_path, t_env *env);
+char	*name_of_env(char *to, char *from);
+int		add_env(char *path, t_env *env);
+int		update_old_path(t_env *env);
+char	*path_of_env(t_env *env, const char *var, size_t len);
 
 //unset.c
 int		ft_unset(char **strs, t_mini *mini);

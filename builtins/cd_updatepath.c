@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 12:25:20 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 16:03:38 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:41:59 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char	*path_of_env(t_env *env, const char *var, size_t len)
 		{
 			length = ft_strlen(env->value) - len;
 			path = (char *)malloc(sizeof(char) * length + 1);
-			if (!path)
-				return (NULL);
 			while (env->value[i++])
 			{
 				if (i > (int)len)

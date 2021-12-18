@@ -5,10 +5,12 @@ endif
 NAME = minishell
 
 SRCS =	builtins/cd_updatepath.c\
+		builtins/cd2.c\
 		builtins/echo.c\
-		builtins/pwd.c\
-		builtins/export.c\
 		builtins/error.c\
+		builtins/export.c\
+		builtins/pwd.c\
+		builtins/export2.c\
 		builtins/export2_sort.c\
 		builtins/free_memo.c\
 		builtins/libft.c\
