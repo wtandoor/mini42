@@ -18,6 +18,14 @@ int	export_error(int err, char *strs)
 	return (2);
 }
 
+static int	export_help(int error, char **strs, t_env *env)
+{
+	if (error == 2)
+		return (1);
+	else
+		return (find_env(strs[1], env));
+}
+
 int	ft_export(char **strs, t_env *env, t_env *sec_env)
 {
 	int	error;
@@ -36,7 +44,7 @@ int	ft_export(char **strs, t_env *env, t_env *sec_env)
 			error = -3;
 		if (error <= 0)
 			return (export_error(error, strs[1]));
-		err_new = error == 2 ? 1 : find_env(strs[1], env);
+		err_new = export_help(error, strs, env);
 		if (err_new == 0)
 		{
 			if (error == 1)
