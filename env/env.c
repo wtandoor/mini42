@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:32:12 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 16:15:15 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:20:33 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	init_sec_env(t_mini *mini, char **env_ar)
 {
-	t_env *env;
-	t_env *new1;
-	int i;
+	t_env	*env;
+	t_env	*new1;
+	int		i;
 
 	env = (t_env *)malloc(sizeof(t_env));
 	if (!env)

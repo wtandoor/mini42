@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:37:50 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 12:38:30 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:04:32 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*next_ex(t_token *token, int i)
 	{
 		token = token->next;
 		if (token && token->type == 1 && token->prev == NULL)
-			 ;
+			;
 		else if (token && token->type == 1 && token->prev->type < 7)
 			token = token->next;
 	}

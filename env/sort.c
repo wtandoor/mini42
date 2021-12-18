@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:34:08 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:35:04 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:23:12 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	sort(char **arr, int env_length)
 		i = 0;
 		while (i < env_length - 1)
 		{
-			if (ft_strcmp(arr[i], arr[i + 1] )> 0)
+			if (ft_strcmp(arr[i], arr[i + 1]) > 0)
 			{
 				temp = arr[i];
 				arr[i] = arr[i + 1];

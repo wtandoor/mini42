@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_for_parse.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/18 15:27:37 by wtandoor          #+#    #+#             */
+/*   Updated: 2021/12/18 15:42:59 by wtandoor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*space_alloc(char *line)
@@ -14,7 +26,8 @@ char	*space_alloc(char *line)
 			count++;
 		i++;
 	}
-	if (!(new1 = (char *)malloc(sizeof(char) * (i + 2 * count + 1))))
+	new1 = (char *)malloc(sizeof(char) * (i + 2 * count + 1));
+	if (!new1)
 		return (NULL);
 	return (new1);
 }
@@ -71,4 +84,22 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 	var_name[i] = '\0';
 	var_value = get_env_val(var_name, env);
 	return (var_value);
+}
+
+int	is_char(int c)
+{
+	if (ft_isalnum(c) == 1 || c == '_')
+		return (1);
+	return (0);
+}
+
+int	res_size(int ret)
+{
+	char	*temp;
+	int		len;
+
+	temp = ft_itoa(ret);
+	len = ft_strlen(temp);
+	delete_memmory(temp);
+	return (len);
 }

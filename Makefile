@@ -20,14 +20,18 @@ SRCS =	builtins/cd_updatepath.c\
 		env/tools_for_env.c\
 		execute/bin.c\
 		execute/exit.c\
-		execute/ft_env.c\
 		execute/for_builtin.c\
 		minishell1/minishell.c\
 		minishell1/signals.c\
 		minishell1/token.c\
+		minishell1/init.c\
+		minishell1/types.c\
 		minishell1/tools_for_main.c\
 		parse/free.c\
 		parse/parse.c\
+		parse/parse2.c\
+		parse/quote.c\
+		parse/work_with_sep.c\
 		parse/tools_for_parse.c\
 		parse/tools_for_parse2.c\
 

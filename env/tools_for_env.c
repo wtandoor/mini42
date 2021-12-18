@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:44 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:29:51 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:24:02 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,3 @@ int	len_env_value(char *env)
 		size++;
 	return (size);
 }
-

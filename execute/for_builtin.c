@@ -6,11 +6,23 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:37:49 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 17:31:17 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:18:32 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	ft_env(t_env *env)
+{
+	while (env && env->next != NULL)
+	{
+		ft_putendl_fd(env->value, 1);
+		env = env->next;
+	}
+	if (env)
+		ft_putendl_fd(env->value, 1);
+	return (1);
+}
 
 int	is_builtin_command(char *command)
 {
@@ -47,4 +59,23 @@ int	execute_builtn(char **arg, t_mini *mini)
 	if (ft_strcmp(arg[0], "unset") == 0)
 		ft_unset(arg, mini);
 	return (res);
+}
+
+int	is_a_type(t_token *token, int type)
+{
+	if (token && token->type == type)
+		return (1);
+	else
+		return (0);
+}
+
+int	are_pipe(t_token *token)
+{
+	while (token && is_a_type(token, 7) == 0)
+	{
+		if (is_a_type(token, 6))
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }
