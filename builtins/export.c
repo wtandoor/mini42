@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_updatepath.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/18 12:25:20 by wtandoor          #+#    #+#             */
+/*   Updated: 2021/12/18 16:03:38 by wtandoor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	valid_env(char *strs)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_isdigit(strs[i]) == 1)
@@ -18,10 +30,10 @@ int	valid_env(char *strs)
 	return (1);
 }
 
-int len_struct(t_env *env)
+int	len_struct(t_env *env)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (env && env->next)
 	{
@@ -30,17 +42,16 @@ int len_struct(t_env *env)
 			i = i + ft_strlen(env->value);
 			i++;
 		}
-
 		env = env->next;
 	}
 	return (i);
 }
 
-char *str_of_env(t_env *sec_env)
+char	*str_of_env(t_env *sec_env)
 {
-	int i;
-	int j;
-	char *temp_env;
+	int		i;
+	int		j;
+	char	*temp_env;
 
 	temp_env = (char *)malloc(sizeof (char *) * len_struct(sec_env) + 1);
 	if (!temp_env)
@@ -54,12 +65,10 @@ char *str_of_env(t_env *sec_env)
 			while (sec_env->value[j])
 			{
 				temp_env[i] = sec_env->value[j];
-				
 				i++;
 				j++;
 			}
 		}
-		
 		if (sec_env->next->next != NULL)
 			temp_env[i++] = '\n';
 		sec_env = sec_env->next;
@@ -68,7 +77,7 @@ char *str_of_env(t_env *sec_env)
 	return (temp_env);
 }
 
-void sort_env_write(t_env *env)
+void	sort_env_write(t_env *env)
 {
 	int		i;
 	char	**tab;
@@ -101,52 +110,4 @@ void	free_buff_n(char **tab)
 	}
 	if (tab)
 		free_memo(tab);
-}
-
-
-int export_error(int err, char *strs)
-{
-	int i;
-
-	i = 0;
-	if (err == -1)
-		ft_putstr_fd("export: not in the context ", 2);
-	if (err == 0 || err == -3)
-		ft_putstr_fd("export: not an identifire ", 2);
-	while (strs[i] && (strs[i] != '=' || err == -3))
-	{
-		write (2, &strs[i], 1);
-		i++;
-	}
-	write(2, "\n", 1);
-	return (2);
-}
-
-int ft_export(char **strs, t_env *env, t_env *sec_env)
-{
-	int	error;
-	int err_new;
-
-	err_new = 0;
-	if (!strs[1])
-	{
-		sort_env_write(sec_env);
-		return (0);
-	}
-	else
-	{
-		error = valid_env(strs[1]);
-		if (strs[1][0] == '=')
-			error = -3;
-		if (error <= 0)
-			return (export_error(error, strs[1]));
-		err_new = error == 2 ? 1 : find_env(strs[1], env);
-		if (err_new == 0)
-		{
-			if (error == 1)
-				add_env(strs[1], env);
-			add_env(strs[1], sec_env);
-		}
-	}
-	return (0);
 }

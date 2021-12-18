@@ -12,15 +12,51 @@
 
 #include "../minishell.h"
 
-void	free_element(t_mini *mini, t_env *env)
+int	go_find_p_env(int variation, t_env *env)
 {
-	if (mini->env == env && env->next == NULL)
+	char	*path;
+	int		i;
+
+	path = NULL;
+	if (variation == 0)
 	{
-		free_memo(mini->env->value);
-		mini->env->value = NULL;
-		mini->env->next = NULL;
-		return ;
+		update_old_path(env);
+		path = path_of_env(env, "HOME", 4);
+		if (!path)
+			ft_putendl_fd("HOME is missing", 2);
+		if (!path)
+			return (1);
 	}
-	free_memo(env->value);
-	free_memo(env);
+	else if (variation == 1)
+	{
+		path = path_of_env(env, "OLDPWD", 6);
+		if (!path)
+			ft_putendl_fd("OLDPWD is missing", 2);
+		if (!path)
+			return (1);
+		update_old_path(env);
+	}
+	i = chdir(path);
+	free_memo(path);
+	return (i);
+}
+
+int	ft_cd(char **strs, t_env *env)
+{
+	int	cd_val;
+
+	if (!strs[1])
+		return (go_find_p_env(0, env));
+	if (ft_strcmp(strs[1], "-") == 0)
+		cd_val = go_find_p_env(1, env);
+	else
+	{
+		update_old_path(env);
+		cd_val = chdir(strs[1]);
+		if (cd_val < 0)
+			cd_val = cd_val * (-1);
+		if (cd_val != 0)
+			error(strs);
+	}
+	return (cd_val);
 }
