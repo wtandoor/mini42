@@ -47,15 +47,11 @@ int	len_struct(t_env *env)
 	return (i);
 }
 
-char	*str_of_env(t_env *sec_env)
+static int	str_of_env2(t_env *sec_env, char *temp_env)
 {
-	int		i;
-	int		j;
-	char	*temp_env;
+	int	i;
+	int	j;
 
-	temp_env = (char *)malloc(sizeof (char *) * len_struct(sec_env) + 1);
-	if (!temp_env)
-		return (NULL);
 	i = 0;
 	while (sec_env && sec_env->next != NULL)
 	{
@@ -73,6 +69,19 @@ char	*str_of_env(t_env *sec_env)
 			temp_env[i++] = '\n';
 		sec_env = sec_env->next;
 	}
+	return (i);
+}
+
+char	*str_of_env(t_env *sec_env)
+{
+	int		i;
+	char	*temp_env;
+
+	temp_env = (char *)malloc(sizeof (char *) * len_struct(sec_env) + 1);
+	if (!temp_env)
+		return (NULL);
+	i = 0;
+	i = str_of_env2(sec_env, temp_env);
 	temp_env[i] = '\0';
 	return (temp_env);
 }
@@ -95,19 +104,4 @@ void	sort_env_write(t_env *env)
 		i++;
 	}
 	free_buff_n(tab);
-}
-
-void	free_buff_n(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		if (tab[i])
-			free_memo(tab[i]);
-		i++;
-	}
-	if (tab)
-		free_memo(tab);
 }

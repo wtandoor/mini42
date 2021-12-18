@@ -12,6 +12,22 @@
 
 #include "../minishell.h"
 
+void	ft_lstadd_back_m(t_env **lst, t_env *new1)
+{
+	t_env	*temp;
+
+	if (lst)
+	{
+		if (*lst)
+		{
+			temp = ft_lstlast_m(*lst);
+			temp->next = new1;
+		}
+		else
+			*lst = new1;
+	}
+}
+
 int	go_find_p_env(int variation, t_env *env)
 {
 	char	*path;
@@ -59,4 +75,19 @@ int	ft_cd(char **strs, t_env *env)
 			error(strs);
 	}
 	return (cd_val);
+}
+
+void	free_buff_n(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i])
+			free_memo(tab[i]);
+		i++;
+	}
+	if (tab)
+		free_memo(tab);
 }

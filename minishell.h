@@ -195,7 +195,7 @@ int execute_builtn(char **arg, t_mini *mini);
 void	free_token(t_token *start);
 void	free_env(t_env *env);
 ///builtins/unset
-void	free_element(t_mini *mini, t_env *env);
+
 int		ft_unset(char **strs, t_mini *mini);
 int		ft_env(t_env *env);
 /////env//////
@@ -256,6 +256,7 @@ int		pipe_ex(t_mini *mini);
 ///[execute]///
 ///bin.c///
 void	execute_command(t_mini *mini, t_token *token);
+void	ft_close(int fd);
 char	*check_dir(char *str, char *cmd);
 int		error_path(char *path);
 int		box(char *path, char **arg, t_env *env, t_mini *mini);
@@ -285,7 +286,7 @@ void	update_shell_lvl(t_env *env);
 size_t	get_env_size(t_env *lst);
 void	print_new_env(t_env *env);
 char	*env_str(t_env *lst);
-int	str_env_length(char **env);
+int		str_env_length(char **env);
 ///tools_for_env.c///
 char	*env_val1(char *env);
 int		env_char(int c);
@@ -296,7 +297,6 @@ void	free_arr2(char **arr);
 void	free_env(t_env *env);
 void	delete_token(t_token *start);
 void	*delete_memmory(void *str);
-void	ft_close(int fd);
 void	free_token(t_token *start);
 ///tools_for_parse.c///
 char	*space_alloc(char *line);
@@ -326,8 +326,49 @@ int		check_quote(t_mini *mini, char **str);
 char	*discovering(char *s, t_env *env, int err);
 int		get_length(char *param, int i, t_env *env, int ret);
 int		param_malloc(char *s, t_env *env, int err);
+
 ///[builtns]///
 
-extern t_sig g_sig;
+// cd2.c
+char	*path_of_env(t_env *env, const char *var, size_t len);
+int		go_find_p_env(int variation, t_env *env);
+int		ft_cd(char **strs, t_env *env);
+
+//export.c
+void	sort_env_write(t_env *env);
+void	free_buff_n(char **tab);
+char	*str_of_env(t_env *sec_env);
+int		len_struct(t_env *env);
+int		valid_env(char *strs);
+
+//export2.c
+int		ft_export(char **strs, t_env *env, t_env *sec_env);
+int		str_env_len(char **env);
+int		export_error(int err, char *strs);
+void	free_buff_n(char **tab);
+
+//free_memmo.c
+void	*free_memo(void *s);
+
+//libft.c
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strlen(const char *s);
+
+//echo.c
+int		ft_echo(char **args);
+int		num_args(char **args);
+//pwd.c
+int		pwd(void);
+
+//unset.c
+int		ft_unset(char **strs, t_mini *mini);
+t_env	*ft_lstnew_m(char *content);
+t_env	*ft_lstlast_m(t_env *lst);
+void	ft_lstadd_back_m(t_env **lst, t_env *new1);
+
+//unset2.c
+void	free_element(t_mini *mini, t_env *env);
+
+extern	t_sig g_sig;
 
 #endif

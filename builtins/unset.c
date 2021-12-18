@@ -22,6 +22,14 @@ static int	len_env_value_static(char *env)
 	return (i);
 }
 
+static void	*free_unset(t_mini *mini, t_env *env)
+{
+	if (env->next)
+			mini->env = env->next;
+	free_element(mini, env);
+	return (0);
+}
+
 int	ft_unset(char **strs, t_mini *mini)
 {
 	t_env	*env;
@@ -32,9 +40,7 @@ int	ft_unset(char **strs, t_mini *mini)
 		return (0);
 	if (ft_strncmp(strs[1], env->value, len_env_value_static(env->value)) == 0)
 	{
-		if (env->next)
-			mini->env = env->next;
-		free_element(mini, env);
+		free_unset(mini, env);
 		return (0);
 	}
 	while (env && env->next)
@@ -51,7 +57,6 @@ int	ft_unset(char **strs, t_mini *mini)
 	}
 	return (0);
 }
-
 
 t_env	*ft_lstnew_m(char *content)
 {
@@ -72,20 +77,4 @@ t_env	*ft_lstlast_m(t_env *lst)
 	while (lst->next != 0)
 		lst = lst->next;
 	return (lst);
-}
-
-void	ft_lstadd_back_m(t_env **lst, t_env *new1)
-{
-	t_env	*temp;
-
-	if (lst)
-	{
-		if (*lst)
-		{
-			temp = ft_lstlast_m(*lst);
-			temp->next = new1;
-		}
-		else
-			*lst = new1;
-	}
 }
