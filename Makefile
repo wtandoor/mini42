@@ -1,3 +1,7 @@
+ifndef VERBOSE
+.SILENT:
+endif
+
 NAME = minishell
 
 SRCS =	builtins/cd_updatepath.c\
@@ -114,15 +118,21 @@ OBJS += $(FUNCTIONS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
+		@echo "\033[0;32mCompiling minishell..."
 		ar rcs minishell.a $(OBJS)
 		gcc -Wall -Werror -Wextra minishell1/minishell.c minishell.a -o $(NAME)
+		@echo "\033[0;32mDone..."
 
 clean:
-	$(RM) $(OBJS)
-	$(RM) minishell.a
+		@echo "\033[31mDelete object files and lib..."
+		$(RM) $(OBJS)
+		$(RM) minishell.a
+		@echo "\033[31mLib and object files deleted..."
 
 fclean: clean
-	$(RM) $(NAME)
+		@echo "\033[31mDelete minishell..."
+		$(RM) $(NAME)
+		@echo "\033[31mMinishell deleted..."
 
 re: fclean all
 
