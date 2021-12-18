@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:32:33 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/04/26 15:07:41 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:59:44 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*new_str;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	if (!s || !(new_str = (char *)malloc(len + 1)))
-		return (0);
+	if (!s)
+		return (NULL);
+	new_str = (char *)malloc(len + 1);
+	if (!new_str)
+		return (NULL);
 	i = start;
 	j = 0;
 	while (i < ft_strlen(s) && j < len)

@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:56:45 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:56:46 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:58:26 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)

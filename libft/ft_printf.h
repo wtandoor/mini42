@@ -6,11 +6,11 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:56:06 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:56:26 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:55:32 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FT_PRINTF_H
+#ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 # include "libft.h"

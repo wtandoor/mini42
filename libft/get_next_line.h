@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:57:01 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 19:11:01 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:00:15 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <string.h>
 # include "libft.h"
 
-#define BUFFER_SIZE 4096
+# define BUFFER_SIZE 4096
 
 int		strl(char *str, char c);
 char	*ft_strchr_gnl(char *str, int ch);

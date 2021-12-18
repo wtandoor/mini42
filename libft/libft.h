@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:57:10 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 17:56:39 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:00:40 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_list
 }		t_list;
 
 int		ft_isprint(int ch);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 int		ft_isascii(int ch);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
@@ -49,7 +49,7 @@ char	*ft_strrchr(const char *str, int ch);
 void	*ft_memset(void *destination, int c, int n);
 void	ft_bzero(void *s, int n);
 void	*ft_memcpy(void *destination, const void *source, int n);
-void	*ft_memchr (const void *arr, int c, int n);
+void	*ft_memchr(const void *arr, int c, int n);
 int		ft_memcmp(const void *arr1, const void *arr2, int n);
 void	*ft_memmove(void *destination, const void *source, int n);
 void	*ft_memccpy(void *destination, const void *source, int c, int n);

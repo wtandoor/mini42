@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:56:58 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 19:14:12 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:00:00 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	read_rs(int fd, char *buf, char *l, int rs)
 			free(l);
 		return (ft_check_rs(buf, rs));
 	}
-	
 	buf[rs] = '\0';
 	return (rs);
 }

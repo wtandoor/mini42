@@ -6,15 +6,15 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 12:25:20 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 12:26:49 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:03:38 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *name_of_env(char *to, char *from)
+char	*name_of_env(char *to, char *from)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (from[i] && from[i] != '=' && ft_strlen(from) < 4096)
@@ -26,10 +26,10 @@ char *name_of_env(char *to, char *from)
 	return (to);
 }
 
-int find_env(char *old_path, t_env *env)
+int	find_env(char *old_path, t_env *env)
 {
-	char old_one[5000];
-	char new_one[5000];
+	char	old_one[5000];
+	char	new_one[5000];
 
 	name_of_env(old_one, old_path);
 	while (env && env->next)
@@ -48,8 +48,8 @@ int find_env(char *old_path, t_env *env)
 
 int	add_env(char *path, t_env *env)
 {
-	t_env *temp;
-	t_env *usable;
+	t_env	*temp;
+	t_env	*usable;
 
 	if (env && env->value == NULL)
 	{
@@ -69,10 +69,10 @@ int	add_env(char *path, t_env *env)
 }
 
 
-int update_old_path(t_env *env)
+int	update_old_path(t_env *env)
 {
-	char *cwd;
-	char *old_path;
+	char	*cwd;
+	char	*old_path;
 
 	cwd = (char *)malloc(sizeof (char *) * 50000);
 	getcwd(cwd, 5000);
@@ -89,10 +89,10 @@ int update_old_path(t_env *env)
 
 static char		*path_of_env(t_env *env, const char *var, size_t len)
 {
-	char *path;
-	int	i;
-	int length;
-	int	h;
+	char	*path;
+	int		i;
+	int		length;
+	int		h;
 
 	i = 0;
 	h = 0;
@@ -117,10 +117,10 @@ static char		*path_of_env(t_env *env, const char *var, size_t len)
 	return (NULL);
 }
 
-int go_find_p_env(int variation, t_env *env)
+int	go_find_p_env(int variation, t_env *env)
 {
-	char *path;
-	int i;
+	char	*path;
+	int		i;
 
 	path = NULL;
 	if (variation == 0)
@@ -147,9 +147,9 @@ int go_find_p_env(int variation, t_env *env)
 
 }
 
-int ft_cd(char **strs, t_env *env)
+int	ft_cd(char **strs, t_env *env)
 {
-	int cd_val;
+	int	cd_val;
 
 	if (!strs[1])
 		return (go_find_p_env(0, env));
