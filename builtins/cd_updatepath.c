@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_updatepath.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/18 12:25:20 by wtandoor          #+#    #+#             */
+/*   Updated: 2021/12/18 12:26:49 by wtandoor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-////finds the path////
 char *name_of_env(char *to, char *from)
 {
 	int i;
@@ -15,16 +26,15 @@ char *name_of_env(char *to, char *from)
 	return (to);
 }
 
-///compares oldENV with the new one////
 int find_env(char *old_path, t_env *env)
 {
-	char old_one[PATH];//var_name
-	char new_one[PATH];
+	char old_one[5000];
+	char new_one[5000];
 
-	name_of_env(old_one, old_path);//finds the name of path
+	name_of_env(old_one, old_path);
 	while (env && env->next)
 	{
-		name_of_env(new_one, env->value);//bring the path of enviroments and put them to new_one var
+		name_of_env(new_one, env->value);
 		if (ft_strcmp(old_one, new_one) == 0)
 		{
 			delete_memmory(env->value);
@@ -36,10 +46,10 @@ int find_env(char *old_path, t_env *env)
 	return (0);
 }
 
-int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в предидущей он не нашелся
+int	add_env(char *path, t_env *env)
 {
 	t_env *temp;
-	t_env *usable;//new
+	t_env *usable;
 
 	if (env && env->value == NULL)
 	{
@@ -50,12 +60,10 @@ int	add_env(char *path, t_env *env)			//добавляет OLDPWD, если в �
 	if (!usable)
 		return (-1);
 	usable->value = ft_strdup(path); 
-	while (env && env->next && env->next->next)		//где то тут не ловит
+	while (env && env->next && env->next->next)
 		env = env->next;
 	temp = env->next;
 	env->next = usable;
-	// printf("temp: %s\n", temp->value);
-	// printf("after: env->next: %s\n", usable->value);
 	usable->next = temp;
 	return (0);
 }
@@ -67,21 +75,19 @@ int update_old_path(t_env *env)
 	char *old_path;
 
 	cwd = (char *)malloc(sizeof (char *) * 50000);
-	getcwd(cwd, PATH);
+	getcwd(cwd, 5000);
 	if (cwd == NULL)
-		return (ERROR);
-	old_path = ft_strjoin("OLDPWD=", cwd); //записал место, где мы находимся сейчас
+		return (1);
+	old_path = ft_strjoin("OLDPWD=", cwd);
 	if (!old_path)
-		return (ERROR);
-	if (find_env(old_path, env) == 0) //если программа завершилась успешно, перед этим мы в oldpath добавили дирректорию, которая будет устаревшей при следующем  переходе
-		add_env(old_path, env); //функция добавляет oldpwd сам если не нашел ее в исходнике////НО ОНА ВСТАВЛЯЕТ НЕВЕРНЫЙ ПУТЬ
-	// printf("напечатай мне что выведетfind_env: %i\n", find_env(old_path, env));
-	// printf("%s\n\n", old_path);
+		return (1);
+	if (find_env(old_path, env) == 0)
+		add_env(old_path, env);
 	free_memo(old_path);
-	return (SUCCESS);
+	return (0);
 }
 
-static char		*path_of_env(t_env *env, const char *var, size_t len) //функция ищет путь, который мы задаем. потом она его пихает в какую-то переменную
+static char		*path_of_env(t_env *env, const char *var, size_t len)
 {
 	char *path;
 	int	i;
@@ -124,7 +130,7 @@ int go_find_p_env(int variation, t_env *env)
 		if (!path)
 			ft_putendl_fd("HOME is missing", 2);
 		if (!path)
-			return (ERROR);
+			return (1);
 	}
 	else if (variation == 1) 
 	{
@@ -132,7 +138,7 @@ int go_find_p_env(int variation, t_env *env)
 		if (!path)
 			ft_putendl_fd("OLDPWD is missing", 2);
 		if (!path)
-			return (ERROR);
+			return (1);
 		update_old_path(env);
 	}
 	i = chdir(path);

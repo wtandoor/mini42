@@ -3,9 +3,9 @@
 
 int pwd(void)
 {
-	char cwd[PATH];
+	char cwd[5000];
 
-	if (getcwd(cwd, PATH))
+	if (getcwd(cwd, 5000))
 	{
 		ft_putendl_fd(cwd, 1);
 		return (0);

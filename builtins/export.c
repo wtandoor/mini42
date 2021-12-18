@@ -33,11 +33,10 @@ int len_struct(t_env *env)
 
 		env = env->next;
 	}
-	// printf("i: %d", i);
 	return (i);
 }
 
-char *str_of_env(t_env *sec_env) //превращаем список в массив с "\n"
+char *str_of_env(t_env *sec_env)
 {
 	int i;
 	int j;
@@ -65,7 +64,6 @@ char *str_of_env(t_env *sec_env) //превращаем список в масс
 			temp_env[i++] = '\n';
 		sec_env = sec_env->next;
 	}
-	
 	temp_env[i] = '\0';
 	return (temp_env);
 }
@@ -75,9 +73,7 @@ void sort_env_write(t_env *env)
 	int		i;
 	char	**tab;
 	char	*str_env;
-	
-// while (env->next)
-// 		printf("sec_env: %s\n", env->value), env = env->next;
+
 	str_env = str_of_env(env);
 	tab = ft_split(str_env, '\n');
 	free_memo(str_env);
@@ -114,16 +110,16 @@ int export_error(int err, char *strs)
 
 	i = 0;
 	if (err == -1)
-		ft_putstr_fd("export: not in the context ", STDERR);
+		ft_putstr_fd("export: not in the context ", 2);
 	if (err == 0 || err == -3)
-		ft_putstr_fd("export: not an identifire ", STDERR);
+		ft_putstr_fd("export: not an identifire ", 2);
 	while (strs[i] && (strs[i] != '=' || err == -3))
 	{
-		write (STDERR, &strs[i], 1);
+		write (2, &strs[i], 1);
 		i++;
 	}
-	write(STDERR, "\n", 1);
-	return (ERROR);
+	write(2, "\n", 1);
+	return (2);
 }
 
 int ft_export(char **strs, t_env *env, t_env *sec_env)
@@ -131,15 +127,11 @@ int ft_export(char **strs, t_env *env, t_env *sec_env)
 	int	error;
 	int err_new;
 
-	// write (1, strs[0], strlen(strs[0]));
 	err_new = 0;
 	if (!strs[1])
 	{
-		// while (sec_env->next)
-		// printf("sec_env: %s\n", sec_env->value), sec_env = sec_env->next;
 		sort_env_write(sec_env);
-		// write (1, "1", 1);
-		return (SUCCESS);
+		return (0);
 	}
 	else
 	{

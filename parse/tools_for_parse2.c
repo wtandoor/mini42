@@ -46,7 +46,7 @@ char		*get_env_name(char *dest, const char *src)
 	int	i;
 
 	i = 0;
-	while (src[i] && src[i] != '=' && ft_strlen(src) < BUFF_SIZE)
+	while (src[i] && src[i] != '=' && ft_strlen(src) < 4096)
 	{
 		dest[i] = src[i];
 		i++;

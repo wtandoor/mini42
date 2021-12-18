@@ -17,7 +17,7 @@ int ft_echo(char **args)
     int n;
 
     n = 0;
-    i = 1;// начинаем не с echo, а со следующего аргумента
+    i = 1;
     f = num_args(args);
     if (f > 1)
     {

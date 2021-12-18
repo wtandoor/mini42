@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:38:47 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 17:22:11 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:40:36 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int check_quote(t_mini *mini, char **str)
 {
     if (quote(*str, 2147483647))
     {
-        ft_putendl_fd("minishell: syntax error with open quotes", STDERR);
+        ft_putendl_fd("minishell: syntax error with open quotes", 2);
         delete_memmory(*str);
         mini->start = NULL;
         mini->ret = 2;
@@ -105,7 +105,7 @@ t_token *add_token(char *s, int *i)
     j = 0;
     a = ' ';
     token = (t_token *)malloc(sizeof(t_token));
-    token->str = (char *)malloc(sizeof(char) * next_a(s, i)); //next_alloc //comp
+    token->str = (char *)malloc(sizeof(char) * next_a(s, i));
     if (!token || !token->str)
         return (NULL);
     while (s[*i] && (s[*i] != ' ' || a != ' '))
@@ -143,17 +143,17 @@ t_token *tokens(char *str)
     i = 0;
     next = NULL;
     prev = NULL;
-    skip_chars(str, &i); //skip_space // comp
+    skip_chars(str, &i);
     while (str[i])
     {
-        separator = skip_separator(str, i); //ignore_sep //comp
-        next = add_token(str, &i); //next_token //comp
+        separator = skip_separator(str, i);
+        next = add_token(str, &i);
         next->prev = prev;
         if (prev)
             prev->next = next;
         prev = next;
-        init_args(next, separator); //type_arg // comp 
-        skip_chars(str, &i);//comp
+        init_args(next, separator);
+        skip_chars(str, &i);
     }
     if (next)
         next->next = NULL;
@@ -212,7 +212,7 @@ void take_args(t_mini *mini)
         prev1 = prev(token, 0);
         if (type_search(token, 2) && is_type(prev1, "TAI"))
         {
-            while(valid_param(prev1) == 0) //is_last_valid_arg
+            while(valid_param(prev1) == 0)
                 prev1 = prev1->prev;
             token->prev->next = token->next;
             if (token->next)
@@ -243,29 +243,27 @@ void parse(t_mini *mini)
 	signal(SIGQUIT, &sig_quit);
     if (mini->ret)
         ft_putstr_fd("ERROR\n", 2);
-    else
-        ft_putstr_fd("Not, ERROR\n", 2);
     ft_putstr_fd("minishell ▸ ", 2);
     if (get_next_line(0, &str) == -1)
     {
         mini->exit = 1;
-        ft_putendl_fd("exit", STDERR);
+        ft_putendl_fd("exit", 2);
     }
     if (g_sig.sigint == 1)
         mini->ret = g_sig.exit_status;
     if (check_quote(mini, &str))
         return ;
-    str = space_line(str);//check //ЧТО ЭТО?!
+    str = space_line(str);
     if (str && str[0] == '$')
         str[0] = (char)(-str[0]);
     mini->start = tokens(str);
     delete_memmory(str);
-    take_args(mini);//dopisat' //squish args
+    take_args(mini);
     token = mini->start;
     while (token)
     {
-        if (type_search(token, 2))//check
-            init_args(token, 0);//dopisat' ..init_args 
+        if (type_search(token, 2))
+            init_args(token, 0);
         token = token->next;
     }
 }
@@ -284,14 +282,14 @@ void var_in(t_disc *str, char *param, t_env *env, int err)
 {
     char *env_val;
 
-    env_val = get_var_value(param, str->j, env, err);///get_var_value
+    env_val = get_var_value(param, str->j, env, err);
     if (env_val)
-        str->i += copy_var(str->new1, env_val, str->i);//varlcpy //complete
+        str->i += copy_var(str->new1, env_val, str->i);
     else
         str->i += 0;
     delete_memmory(env_val);
     if (ft_isdigit(param[str->j]) == 0 && param[str->j - 1] != '?')
-        while(env_char(param[str->j]) == 1)//is_env_char
+        while(env_char(param[str->j]) == 1)
             str->j++;
     else
         if (param[str->j - 1] != '?')
@@ -317,7 +315,7 @@ int get_length(char *param, int i, t_env *env, int ret)
 
     l = 0;
     if (param[i] == '?')
-        return (res_size(ret)); //ret_size //comp
+        return (res_size(ret));
     if (ft_isdigit(param[i]))
         return (0);
     while (param[i] && env_char(param[i]) == 1 && i < 4096)
@@ -327,7 +325,7 @@ int get_length(char *param, int i, t_env *env, int ret)
         l++;
     }
     name_var[l] = '\0';
-    var_value = get_env_val(name_var, env); //get_env_val //comp
+    var_value = get_env_val(name_var, env);
     l = ft_strlen(var_value);
     delete_memmory(var_value);
     return (l);
@@ -348,7 +346,7 @@ int param_malloc(char *param, t_env *env, int err)
             if ((param[i] == '\0' || ft_isalnum(param[i]) == 0) && param[i] != '?')
                 size++;
             else
-                size += get_length(param, i, env, err); //get_var_len //comp
+                size += get_length(param, i, env, err);
             if (ft_isdigit(param[i]) == 0)
             {
                 while (param[i + 1] && env_char(param[i]))

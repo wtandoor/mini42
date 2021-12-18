@@ -17,7 +17,7 @@ int ft_unset(char **strs, t_mini *mini)
 
 	env = mini->env;
 	if (!(strs[1]))
-		return (SUCCESS);
+		return (0);
 	if (ft_strncmp(strs[1], env->value, len_env_value_static(env->value)) == 0)
 	{
 		if (env->next)
@@ -25,26 +25,20 @@ int ft_unset(char **strs, t_mini *mini)
 		else 
 			mini->env = mini->env;
 		free_element(mini, env);
-		return (SUCCESS);
+		return (0);
 	}
 	while (env && env->next)
 	{
-		// printf("unset :%s\n", env->value);
 		if (ft_strncmp(strs[1], env->next->value, len_env_value_static(env->next->value)) == 0)
 		{
 			temp = env->next->next;
 			free_element(mini, env->next);
 			env->next = temp;
-			return (SUCCESS);
+			return (0);
 		}
 		env = env->next;
 	}
-	// while (mini->env)
-	// 	{
-	// 		printf("unset _ %s\n", mini->env->value);
-	// 		mini->env = mini->env->next;
-	// 	}
-	return (SUCCESS);
+	return (0);
 }
 
 t_env	*ft_lstnew_m(char *content)

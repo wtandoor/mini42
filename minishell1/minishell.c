@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:33:52 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 17:21:28 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:42:02 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_sig g_sig;
 
 void    init_mini(t_mini *mini)
 {
-	mini->in = dup(STDIN);
-	mini->out = dup(STDOUT);
+	mini->in = dup(0);
+	mini->out = dup(1);
 	mini->exit = 0;
 	mini->ret = 0;
 	mini->no_exec = 0;

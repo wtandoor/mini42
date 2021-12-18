@@ -50,7 +50,7 @@ char	*space_line(char *line)
 
 char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 {
-	char	var_name[BUFF_SIZE];
+	char	var_name[4096];
 	char	*var_value;
 	int		i;
 
@@ -62,7 +62,7 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 	}
 	if (ft_isdigit(arg[pos]))
 		return (NULL);
-	while (arg[pos] && env_char(arg[pos]) == 1 && i < BUFF_SIZE)
+	while (arg[pos] && env_char(arg[pos]) == 1 && i < 4096)
 	{
 		var_name[i] = arg[pos];
 		pos++;

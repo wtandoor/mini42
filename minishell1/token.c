@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:37:50 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 16:35:20 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:38:30 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ t_token	*next_ex(t_token *token, int i)
 void	type_arg(t_token *token, int separator)
 {
 	if (ft_strcmp(token->str, "") == 0)
-		token->type = EMPTY;
+		token->type = 0;
 	else if (ft_strcmp(token->str, ">") == 0 && separator == 0)
-		token->type = TRUNC;
+		token->type = 3;
 	else if (ft_strcmp(token->str, ">>") == 0 && separator == 0)
-		token->type = APPEND;
+		token->type = 4;
 	else if (ft_strcmp(token->str, "<") == 0 && separator == 0)
-		token->type = INPUT;
+		token->type = 5;
 	else if (ft_strcmp(token->str, "|") == 0 && separator == 0)
-		token->type = PIPE;
+		token->type = 6;
 	else if (ft_strcmp(token->str, ";") == 0 && separator == 0)
-		token->type = END;
-	else if (token->prev == NULL || token->prev->type >= TRUNC)
-		token->type = CMD;
+		token->type = 7;
+	else if (token->prev == NULL || token->prev->type >= 3)
+		token->type = 1;
 	else
-		token->type = ARG;
+		token->type = 2;
 }

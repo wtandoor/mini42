@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:38:32 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/17 16:59:21 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:38:14 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,9 @@ int		is_a_type(t_token *token, int type)
 
 int		are_pipe(t_token *token)
 {
-	while (token && is_a_type(token, END) == 0)
+	while (token && is_a_type(token, 7) == 0)
 	{
-		if (is_a_type(token, PIPE))
+		if (is_a_type(token, 6))
 			return (1);
 		token = token->next;
 	}
