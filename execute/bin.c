@@ -6,11 +6,20 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:38:32 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 15:15:19 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:47:42 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int	box_add(int res)
+{
+	if (res == 32256 || res == 32512)
+		res = res / 256;
+	else
+		res = !!res;
+	return (res);
+}
 
 int	box(char *path, char **arg, t_env *env, t_mini *mini)
 {
@@ -36,17 +45,8 @@ int	box(char *path, char **arg, t_env *env, t_mini *mini)
 		waitpid(g_sig.pid, &res, 0);
 	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
 		return (g_sig.exit_status);
-	if (res == 32256 || res == 32512)
-		res = res / 256;
-	else
-		res = !!res;
+	res = box_add(res);
 	return (res);
-}
-
-void	ft_close(int fd)
-{
-	if (fd > 0)
-		close(fd);
 }
 
 char	*check_dir(char *str, char *cmd)

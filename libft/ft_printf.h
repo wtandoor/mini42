@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:56:06 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 15:55:32 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:29:38 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		search_flags(t_flags *flags, char *s1);
 int		string_flags(t_flags flags, va_list parameters);
 int		zero(char symb, t_flags *flags);
 int		minus(char symb, t_flags *flags);
-int		Void(char symb, t_flags *flags);
+int		void_2(char symb, t_flags *flags);
 int		dot(char symb, t_flags *flags);
 int		accuracy(char *s1, t_flags *flags);
 int		width(char *s1, t_flags *flags);

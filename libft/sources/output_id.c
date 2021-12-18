@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:15 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:55:16 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:30:49 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	output_decimal(t_flags flags, va_list parameters)
 
 char	*search_space(int n, t_flags flags, char *s1, int flag)
 {
-	char	*Void;
+	char	*void_1;
 	char	*s_edit;
 
 	s_edit = "";
-	Void = " ";
+	void_1 = " ";
 	if (n >= 0 && flags.space)
 	{
 		if (!flag)
@@ -50,7 +50,7 @@ char	*search_space(int n, t_flags flags, char *s1, int flag)
 		}
 		else
 		{
-			s_edit = ft_strjoin(Void, s1);
+			s_edit = ft_strjoin(void_1, s1);
 			if (!s_edit)
 				return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:26:18 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 15:26:43 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:48:18 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ void	delete_token(t_token *start)
 		delete_memmory(start->str);
 		delete_memmory(start);
 	}
+}
+
+void	ft_close(int fd)
+{
+	if (fd > 0)
+		close(fd);
 }

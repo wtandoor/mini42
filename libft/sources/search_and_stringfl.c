@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:38 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/16 18:09:29 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:31:11 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	search_flags(t_flags *flags, char *s1)
 		else if (s1[i] == '-')
 			i += minus(s1[i], flags);
 		else if (s1[i] == ' ')
-			i += Void(s1[i], flags);
+			i += void_2(s1[i], flags);
 		else if (s1[i] == '.')
 			i += dot(s1[i], flags);
 		else if ((s1[i] == '*' && flags->dot == 1)

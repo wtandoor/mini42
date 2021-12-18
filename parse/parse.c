@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:38:47 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 15:51:11 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:43:30 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ t_token	*tokens(char *str)
 	return (next);
 }
 
+static void	take_args_add(t_mini *mini, t_token *prev1, t_token *token)
+{
+	if (prev1)
+		token->next = prev1->next;
+	else
+		token->next = mini->start;
+	if (!prev1)
+		prev1 = token;
+	prev1->next->prev = token;
+	if (!mini->start->prev)
+		prev1->next = token;
+	if (mini->start->prev)
+				mini->start = mini->start->prev;
+}
+
 void	take_args(t_mini *mini)
 {
 	t_token	*prev1;
@@ -58,18 +73,24 @@ void	take_args(t_mini *mini)
 			if (token->next)
 				token->next->prev = token->prev;
 			token->prev = prev1;
-			if (prev1)
-				token->next = prev1->next;
-			else
-				token->next = mini->start;
-			if (!prev1)
-				prev1 = token;
-			prev1->next->prev = token;
-			if (!mini->start->prev)
-				prev1->next = token;
-			if (mini->start->prev)
-				mini->start = mini->start->prev;
+			take_args_add(mini, prev1, token);
 		}
+		token = token->next;
+	}
+}
+
+static void	parse_add(char *str, t_mini *mini, t_token *token)
+{
+	if (str && str[0] == '$')
+		str[0] = (char)(-str[0]);
+	mini->start = tokens(str);
+	delete_memmory(str);
+	take_args(mini);
+	token = mini->start;
+	while (token)
+	{
+		if (type_search(token, 2))
+			init_args(token, 0);
 		token = token->next;
 	}
 }
@@ -79,6 +100,7 @@ void	parse(t_mini *mini)
 	char	*str;
 	t_token	*token;
 
+	token = NULL;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	if (mini->ret)
@@ -94,16 +116,5 @@ void	parse(t_mini *mini)
 	if (check_quote(mini, &str))
 		return ;
 	str = space_line(str);
-	if (str && str[0] == '$')
-		str[0] = (char)(-str[0]);
-	mini->start = tokens(str);
-	delete_memmory(str);
-	take_args(mini);
-	token = mini->start;
-	while (token)
-	{
-		if (type_search(token, 2))
-			init_args(token, 0);
-		token = token->next;
-	}
+	parse_add(str, mini, token);
 }

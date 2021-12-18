@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:00 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/15 14:55:01 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:29:24 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	minus(char symb, t_flags *flags)
 	return (1);
 }
 
-int	Void(char symb, t_flags *flags)
+int	void_2(char symb, t_flags *flags)
 {
 	if (symb == ' ')
 		flags->space = 1;

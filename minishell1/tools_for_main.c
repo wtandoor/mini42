@@ -6,11 +6,19 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:20:28 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 14:24:02 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:35:18 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	line_check_add(t_token *token, t_mini *mini)
+{
+	ft_putstr_fd("bash: syntax error near unexpected token `", 2);
+	ft_putstr_fd(token->str, 2);
+	ft_putendl_fd("'", 2);
+	mini->ret = 258;
+}
 
 int	line_check(t_mini *mini, t_token *token)
 {
@@ -31,10 +39,7 @@ int	line_check(t_mini *mini, t_token *token)
 		if (is_type(token, "PE")
 			&& (!token->prev || !token->next || is_type(token->prev, "TAIPE")))
 		{
-			ft_putstr_fd("bash: syntax error near unexpected token `", 2);
-			ft_putstr_fd(token->str, 2);
-			ft_putendl_fd("'", 2);
-			mini->ret = 258;
+			line_check_add(token, mini);
 			return (0);
 		}
 		token = token->next;

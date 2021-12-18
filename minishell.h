@@ -256,7 +256,6 @@ int		pipe_ex(t_mini *mini);
 ///[execute]///
 ///bin.c///
 void	execute_command(t_mini *mini, t_token *token);
-void	ft_close(int fd);
 char	*check_dir(char *str, char *cmd);
 int		error_path(char *path);
 int		box(char *path, char **arg, t_env *env, t_mini *mini);
@@ -297,6 +296,7 @@ void	free_arr2(char **arr);
 void	free_env(t_env *env);
 void	delete_token(t_token *start);
 void	*delete_memmory(void *str);
+void	ft_close(int fd);
 void	free_token(t_token *start);
 ///tools_for_parse.c///
 char	*space_alloc(char *line);
