@@ -6,7 +6,7 @@
 /*   By: wtandoor <wtandoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:40:51 by wtandoor          #+#    #+#             */
-/*   Updated: 2021/12/18 18:41:22 by wtandoor         ###   ########.fr       */
+/*   Updated: 2021/12/20 14:46:18 by wtandoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_export(char **strs, t_env *env, t_env *sec_env)
 	err_new = 0;
 	if (!strs[1])
 	{
-		sort_env_write(sec_env);
+		sort_env_write(env);
 		return (0);
 	}
 	else
